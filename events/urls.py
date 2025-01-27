@@ -1,6 +1,6 @@
 from django.urls import path
-from events.views import show_events
+from events.views import organizer_dashboard
 
 urlpatterns = [
-    path('show-events/', show_events),
+    path('organizer-dashboard/', organizer_dashboard),
 ]

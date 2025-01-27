@@ -4,7 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse("Welcome to the event management system")
+    return render(request, "home.html")
 
-def show_events(request):
-    return HttpResponse("Welcome to the event management system")
+def organizer_dashboard(request):
+    return render(request, "organizer-dashboard.html")
+
+# def show_events(request):
+#     return HttpResponse("Welcome to the event management system")
