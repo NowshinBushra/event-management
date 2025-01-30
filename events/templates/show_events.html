@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <ul><p>All Events</p>
+            {% for event in all_events %}
+            <li>
+                {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <ul><p>Todays Event</p>
+            {% for event in todays_event %}
+            <li>
+                {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <ul><p>Upcoming Events</p>
+            {% for event in upcoming_event %}
+            <li>
+                {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <ul><p>Past Events</p>
+            {% for event in past_event %}
+            <li>
+                {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+</body>
+</html>

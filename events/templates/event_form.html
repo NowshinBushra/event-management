@@ -1,15 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
 </head>
 <body>
+    <div class="w-1/2 mx-auto mt-8">
+    <div>
+        {% if message %}
+            <p>{{message}}</p>
+        {% endif %}
+        {% comment %} {% if messages %}
+            {% for message in messages %}
+                <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-500{% endif %} ">{{message}}</div>
+            {% endfor %}
+        {% endif %} {% endcomment %}
+    </div>
+    
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" class="mb-5 bg-purple-500 px-3 py-2 mt-2 rounded-md">Submit</button>
     </form>
 </body>
 </html>
