@@ -7,10 +7,10 @@
 </head>
 <body>
     <div>
-        <p><strong>Total Participants:</strong> {{ all_participants }}</p>
+        <p><strong>Total Participants:</strong> {{ all_participants_count }}</p>
         <p><strong>Total Events:</strong> {{ total_events }}</p>
-        <p><strong>Upcoming Events:</strong> {{ upcoming_events }}</p>
-        <p><strong>Past Events:</strong> {{ past_events }}</p>
+        <p><strong>Upcoming Events:</strong> {{ upcoming_events_count }}</p>
+        <p><strong>Past Events:</strong> {{ past_events_count }}</p>
     </div>
     <div>
         <ul><p>Todays Event</p>
@@ -23,7 +23,7 @@
     </div>
     <div>
         <ul><p>Upcoming Events</p>
-            {% for event in upcoming_events.title %}
+            {% for event in upcoming_events %}
             <li>
                 {{event}}
             </li>
@@ -32,7 +32,7 @@
     </div>
     <div>
         <ul><p>Past Events</p>
-            {% for event in past_events.title %}
+            {% for event in past_events %}
             <li>
                 {{event}}
             </li>
@@ -41,7 +41,7 @@
     </div>
     <div>
         <ul><p>Total Participants</p>
-            {% for participant in all_participants.name %}
+            {% for participant in all_participants %}
             <li>
                 {{participant}}
             </li>

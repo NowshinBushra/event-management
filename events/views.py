@@ -17,7 +17,32 @@ def home(request):
         })
 
 def organizer_dashboard(request):
-    return render(request, "organizer-dashboard.html")
+    today = now().date()
+    total_events = Event.objects.count()
+    todays_event = Event.objects.filter(date=today)
+
+    upcoming_events = Event.objects.filter(date__gte=today)
+    upcoming_events_count = upcoming_events.count()
+
+    past_events = Event.objects.filter(date__lt=today)
+    past_events_count = past_events.count()
+
+    all_participants = Participant.objects.all()
+    all_participants_count = all_participants.count()
+
+    context = {
+        "todays_event": todays_event,
+        'total_events': total_events,
+
+        "upcoming_events": upcoming_events,
+        "upcoming_events_count": upcoming_events_count,
+        "past_events": past_events,
+        "past_events_count": past_events_count,
+        "all_participants": all_participants,
+        "all_participants_count": all_participants_count,
+        }
+
+    return render(request, "organizer-dashboard.html", context)
 
 # def show_events(request):
 #     return HttpResponse("Welcome to the event management system")
@@ -41,18 +66,30 @@ def create_event(request):
 
 
 
-def view_events(request):
-    today = now().date()
-    total_events = Event.objects.count()
-    todays_event = Event.objects.filter(date=today)
-    upcoming_events = Event.objects.filter(date__gte=today).count()
-    past_events = Event.objects.filter(date__lt=today).count()
-    all_participants = Participant.objects.all().count()
+# def view_events(request):
+#     today = now().date()
+#     total_events = Event.objects.count()
+#     todays_event = Event.objects.filter(date=today)
 
-    return render(request, "show_events.html", {
-        "todays_event": todays_event,
-        'total_events': total_events,
-        "upcoming_events": upcoming_events,
-        "past_events": past_events,
-        "all_participants": all_participants,
-        }) 
+#     upcoming_events = Event.objects.filter(date__gte=today)
+#     upcoming_events_count = upcoming_events.count()
+
+#     past_events = Event.objects.filter(date__lt=today)
+#     past_events_count = past_events.count()
+
+#     all_participants = Participant.objects.all()
+#     all_participants_count = all_participants.count()
+
+#     context = {
+#         "todays_event": todays_event,
+#         'total_events': total_events,
+
+#         "upcoming_events": upcoming_events,
+#         "upcoming_events_count": upcoming_events_count,
+#         "past_events": past_events,
+#         "past_events_count": past_events_count,
+#         "all_participants": all_participants,
+#         "all_participants_count": all_participants_count,
+#         }
+
+#     return render(request, "organizer-dashboard.html", context) 
