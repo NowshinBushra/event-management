@@ -71,4 +71,4 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
         # fields = '__aLL__'
         fields = ['title', 'description', 'date', 'time', 'location', 'category']
         
-        widgets = {'date' : forms.SelectDateWidget, 'category': forms.Select}
+        widgets = {'date' : forms.SelectDateWidget, 'time': forms.TimeInput(attrs={'type': 'time'}), 'category': forms.Select}

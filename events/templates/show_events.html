@@ -7,13 +7,10 @@
 </head>
 <body>
     <div>
-        <ul><p>All Events</p>
-            {% for event in all_events %}
-            <li>
-                {{event}}
-            </li>
-            {% endfor %}
-        </ul>
+        <p><strong>Total Participants:</strong> {{ all_participants }}</p>
+        <p><strong>Total Events:</strong> {{ total_events }}</p>
+        <p><strong>Upcoming Events:</strong> {{ upcoming_events }}</p>
+        <p><strong>Past Events:</strong> {{ past_events }}</p>
     </div>
     <div>
         <ul><p>Todays Event</p>
@@ -26,7 +23,7 @@
     </div>
     <div>
         <ul><p>Upcoming Events</p>
-            {% for event in upcoming_event %}
+            {% for event in upcoming_events.title %}
             <li>
                 {{event}}
             </li>
@@ -35,9 +32,18 @@
     </div>
     <div>
         <ul><p>Past Events</p>
-            {% for event in past_event %}
+            {% for event in past_events.title %}
             <li>
                 {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <ul><p>Total Participants</p>
+            {% for participant in all_participants.name %}
+            <li>
+                {{participant}}
             </li>
             {% endfor %}
         </ul>
