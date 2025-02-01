@@ -22,6 +22,15 @@
         </ul>
     </div>
     <div>
+        <ul><p>All Events</p>
+            {% for event in events %}
+            <li>
+                {{event}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
         <ul><p>Upcoming Events</p>
             {% for event in upcoming_events %}
             <li>
