@@ -1,10 +1,11 @@
 
-from django.shortcuts import render
-from django.db.models import Q, Count
+from django.shortcuts import render, redirect
+from django.db.models import Q, Count 
 from django.utils.timezone import now
 from django.http import HttpResponse
 from events.forms import EventModelForm
 from events.models import Event, Participant, Category
+from django.contrib import messages
 
 # Create your views here.
 
@@ -78,7 +79,24 @@ def create_event(request):
         if form.is_valid():
             form.save()
 
-            return render(request, "event_form.html", {"form": form, "message": "Event added successfully"})
+            messages.success(request, "Event added successfully")
+            return redirect('create-event')
+
+    context = {"form": form}
+    return render(request, "event_form.html", context)
+
+
+def update_event(request, id):
+    event = Event.objects.get(id=id)
+    form = EventModelForm(instance=event)
+
+    if request.method == "POST":
+        form = EventModelForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, "Event updated successfully")
+            return redirect('create-event')
 
     context = {"form": form}
     return render(request, "event_form.html", context)
