@@ -58,6 +58,11 @@ class StyledFormMixin:
                     'class': f"{self.default_classes} space-y-2 text-green",
                     'placeholder':  f"Select {field.label.lower()}",
                 })
+            elif isinstance(field.widget, forms.CheckboxSelectMultiple):
+                # print("Inside checkbox")
+                field.widget.attrs.update({
+                     'class': "space-y-2"
+                })
             else:
                 # print("Inside else")
                 field.widget.attrs.update({
@@ -66,9 +71,17 @@ class StyledFormMixin:
 
 
 class EventModelForm(StyledFormMixin, forms.ModelForm):
+
+    participants = forms.ModelMultipleChoiceField(
+        queryset=Participant.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
     class Meta:
         model = Event
         # fields = '__aLL__'
-        fields = ['title', 'description', 'date', 'time', 'location', 'category']
+        fields = ['title', 'description', 'date', 'time', 'location', 'category', 'participants']
         
-        widgets = {'date' : forms.SelectDateWidget, 'time': forms.TimeInput(attrs={'type': 'time'}), 'category': forms.Select}
+        widgets = {
+            'date' : forms.SelectDateWidget, 
+            'time': forms.TimeInput(attrs={'type': 'time'}), 
+            'category': forms.Select}

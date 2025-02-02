@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 from django.db.models import Q, Count 
-from django.utils.timezone import now
+from django.utils.timezone import now, localdate
 from django.http import HttpResponse
 from events.forms import EventModelForm
 from events.models import Event, Participant, Category
@@ -18,66 +18,25 @@ def home(request):
         'ps' : ps
         })
 
-def organizer_dashboard(request):
-    type = request.GET.get('type','all')
-    print(type)
-
-    today = now().date()
-    all_participants = Participant.objects.all()
-    all_participants_count = all_participants.count()
-    
-    base_query = Event.objects.select_related('category').prefetch_related('participants')
-
-    if type == 'all':
-        events = base_query.all()
-    elif type == 'todays_event':
-        events = base_query.filter(date=today)
-    elif type == 'upcoming_events':
-        events = base_query.filter(date__gte=today)
-    elif type == 'past_events':
-        events = base_query.filter(date__lt=today)
-    elif type == 'all_participants':
-        events = all_participants
-
-    # todays_event = Event.objects.filter(date=today)
-    # upcoming_events = Event.objects.filter(date__gte=today)
-    # past_events = Event.objects.filter(date__lt=today)
-
-    
-
-    counts = Event.objects.aggregate(
-        total_events = Count('id'),
-        upcoming_events_count = Count('id', filter= Q(date__gte=today)),
-        past_events_count = Count('id', filter= Q(date__lt=today))
-    )
-    context = {
-        'events': events,
-        'counts': counts,
-        # 'type' : type,
-        # "todays_event": todays_event,
-        # "upcoming_events": upcoming_events,
-        # "past_events": past_events,
-
-        "all_participants": all_participants,
-        "all_participants_count": all_participants_count,
-        }
-
-    return render(request, "organizer-dashboard.html", context)
 
 # def show_events(request):
 #     return HttpResponse("Welcome to the event management system")
-
-
-def create_event(request):
-    # participants = Participant.objects.all()
+ # participants = Participant.objects.all()
     # categories = Category.objects.all()
     # form = EventModelForm(participants = participants, categories = categories)
+
+def create_event(request):
+   
     form = EventModelForm()
 
     if request.method == "POST":
         form = EventModelForm(request.POST)
         if form.is_valid():
-            form.save()
+            event = form.save(commit=False)
+            event.save()
+
+            participants = form.cleaned_data.get('participants') 
+            event.participants.set(participants)
 
             messages.success(request, "Event added successfully")
             return redirect('create-event')
@@ -96,11 +55,64 @@ def update_event(request, id):
             form.save()
 
             messages.success(request, "Event updated successfully")
-            return redirect('create-event')
+            return redirect('update-event', id)
 
     context = {"form": form}
     return render(request, "event_form.html", context)
 
+def delete_event(request, id):
+    if request.method =="POST":
+        event = Event.objects.get(id=id)
+        event.delete()
+        messages.success(request, 'Event deleted successfully')
+        return redirect('organizer-dashboard')
+    else:
+        messages.success(request, 'Something went wrong')
+        return redirect('organizer-dashboard')
+
+
+
+
+
+
+
+def organizer_dashboard(request):
+    type = request.GET.get('type','all')
+
+    today = now().date()
+    todays_event = Event.objects.filter(date=today)
+
+    all_participants = Participant.objects.all()
+    all_participants_count = all_participants.count()
+    
+    base_query = Event.objects.select_related('category').prefetch_related('participants')
+
+    if type == 'all':
+        events = base_query.all()
+    elif type == 'upcoming events':
+        events = base_query.filter(date__gte=today)
+    elif type == 'past events':
+        events = base_query.filter(date__lt=today)
+    elif type == 'all_participants':
+        events = all_participants
+
+    
+
+    counts = Event.objects.aggregate(
+        total_events = Count('id'),
+        upcoming_events_count = Count('id', filter= Q(date__gte=today)),
+        past_events_count = Count('id', filter= Q(date__lt=today))
+    )
+    context = {
+        'events': events,
+        'counts': counts,
+        'type' : type.upper,
+        "todays_event": todays_event,
+        "all_participants": all_participants,
+        "all_participants_count": all_participants_count,
+        }
+
+    return render(request, "organizer-dashboard.html", context)
 
 
 # def view_events(request):
