@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-slate-400 text-white font-semibold m-60 p-44">
+        <div class="">
+            <h2 class="text-xl font-bold"><span class="text-yellow-200">Event Title: </span>{{ event.title }}</h2>
+            <p><span class="text-yellow-200">Description: </span>{{ event.description }}</p>
+            <p><span class="text-yellow-200">Category: </span>{{ event.category.name }}</p>
+        
+            <p><span class="text-yellow-200">Participants: </span>{% for p in event.participants.all %}
+                                <li>{{p.name}}</li>
+                            {% endfor %}
+            </p>
+        </div>
+        <div class="text-teal-800 mt-5">
+            <span class="bg-yellow-50 px-4 py-2 mx-1">Date: {{ event.date }}</span>
+            <span class="bg-yellow-50 px-4 py-2 mx-1">time: {{ event.time }}</span>
+            <span class="bg-yellow-50 px-4 py-2 mx-1">location: {{ event.location }}</span>
+
+    </div>
+</body>
+</html>

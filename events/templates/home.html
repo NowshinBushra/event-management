@@ -51,7 +51,6 @@
       </header>
       <main>
         {% comment %} Banner {% endcomment %}
-        {% comment %} <div class="h-96 text-center text-yellow-950 bg-gradient-to-r from-zinc-400 via-orange-200 to-zinc-400"> {% endcomment %}
         <div class="h-96 w-full text-center text-yellow-950 banner">
           <h1 class="text-6xl font-semibold pt-20">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
           <h5 class="text-xl py-7">Technology || Corporate Event || Exhibition Stall || Music</h5>
@@ -59,13 +58,8 @@
           <div class="flex justify-center">
             <div class="w-1/5 max-w-sm">
               <div class="relative shadow-xl rounded border border-amber-900">
-                <input
-                  class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..." 
-                />
-                <button
-                  class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white "
-                  type="button"
-                >
+                <input class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..."/>
+                <button class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
@@ -79,31 +73,16 @@
             </div>
           </div>
         </div>
-        <div>
-          <div>
-            <ul><p>All Events</p>
-                {% for event in events %}
-                <li>
-                    <p>Event Title: {{event.title}}</p>
-                    <p>Category: {{event.category.name}}</p>
-                    <p>Participants: {{event.participant_count}}</p>
-                    
-                    {% for p in event.participants.all %}
-                        <p>Participants: {{p.name}}</p>
-                    {% endfor %}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        </div>
+  
 
         {% comment %} Event by category {% endcomment %}
-        <div class='bg-indigo-900 px-3 pt-8'>
-          <h1 class="text-3xl font-semibold py-6 text-center text-orange-300">Event by Category</h1>
+        <div class='bg-indigo-100 px-3 pb-8'>
+          <h1 class="text-3xl font-semibold py-6 text-center text-yellow-700">Event by Category</h1>
           <div class="grid grid-cols-4 gap-6 mb-4">
-            {% comment %}  {% endcomment %}
+            
+            {% comment %} TECHNOLOGY {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=1"
-              class="{% if request.GET.category == '1' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              class="{% if request.GET.category == '1' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
                 <h3 class="text-lg font-medium text-yellow-600">TECHNOLOGY</h3>
                   <div class="bg-yellow-100 p-3 rounded-full">
@@ -124,7 +103,7 @@
             </a>
             {% comment %} CORPORATE EVENTS {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=2"
-              class="{% if request.GET.category == '2' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              class="{% if request.GET.category == '2' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
                 <h3 class="text-lg font-medium text-yellow-600">CORPORATE EVENTS</h3>
                   <div class="bg-yellow-100 p-3 rounded-full">
@@ -136,7 +115,7 @@
             </a>
             {% comment %} EXHIBITION STALL {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=3"
-            class="{% if request.GET.category == '3' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+            class="{% if request.GET.category == '3' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
                 <h3 class="text-lg font-medium text-yellow-600">
                   EXHIBITION STALL
@@ -150,7 +129,7 @@
             </a>
             {% comment %} MUSIC {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=4"
-            class="{% if request.GET.category == '4' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+            class="{% if request.GET.category == '4' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
                 <h3 class="text-lg font-medium text-yellow-600">MUSIC</h3>
                   <div class="bg-yellow-100 p-3 rounded-full">
@@ -171,55 +150,42 @@
                   </div>
               </div>
             </a>
-          </div>
-        
-
-        {% for event in events %}
-        <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
-          <div>
-            <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
-            <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
-            <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
-          </div>
-          <div>
-            <a class="bg-yellow-600 rounded p-6 shadow-sm" href="">Ticket and details</a>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-
-        {% comment %} Dynamic Events {% endcomment %}
-
-        {% comment %} <div class="bg-white p-6 rounded-lg shadow">
-          
-          <table class="w-full">
-            <thead>
-              <tr class="text-left text-gray-500">
-                <th class="pb-2">EVENT TITLE</th>
-                <th class="pb-2">DATE</th>
-                <th class="pb-2">LOCATION</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for event in events %}
-            <tr>
-              <td class="py-2">
-                <div class="flex items-center">
-                  <span
-                    class="w-2 h-2 bg-green-500 rounded-full mr-2"
-                  ></span>
-                  <span>{{event}}</span>
+            {% comment %} search by date {% endcomment %}
+            <div class="mx-10">
+              <p class="text-4xl font-bold mb-4">Filter Events by Date: </p>
+              <div class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md">
+                <div class="flex flex-col">
+                <label class="text-gray-700 font-medium" for="start_date">Start Date:</label>
+                <input class="text-gray-600 border rounded-lg p-2" type="date" name="start_date">
                 </div>
-              </td>
-              <td class="py-2 text-sm text-gray-500">{{event.date}}</td>
-              <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
-            </tr>
-              {% endfor %} {% endcomment %}
-              
-            </tbody>
-          </table>
+  
+                <div class="flex flex-col">
+                <label class=" text-gray-700 font-medium" for="end_date">End Date:</label>
+                <input class="text-gray-600 border rounded-lg p-2" type="date" name="end_date">
+                </div>
+  
+                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition" type="submit">Filter</button>
+              </div>
+            </div>
+
+          </div>
+          
         </div>
 
+          {% comment %} Dynamic Events {% endcomment %}
+          {% for event in events %}
+          <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
+            <div>
+              <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
+              <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
+              <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
+            </div>
+            <div>
+            <a class="bg-yellow-600 rounded p-6 shadow-sm" href="{% url 'event-detail' event.id%}">Ticket and details</a>
+            </div>
+          </div>
+          {% endfor %}
+        
       </main>
 </body>
 </html>

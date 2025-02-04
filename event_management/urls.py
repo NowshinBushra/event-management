@@ -6,7 +6,6 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', home),
     path('', include('events.urls')),
     path('events/', include('events.urls')),
     # path('participants', include('participants.urls')),

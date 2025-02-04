@@ -21,34 +21,30 @@ from django.contrib import messages
 
 def events_by_category(request):
     c_id = request.GET.get('category')
-    print(c_id)
+    start_date = request.GET.get("start_date")
+    end_date = request.GET.get("end_date")
 
-    all_participants = Participant.objects.all()
-    all_participants_count = all_participants.count()
-    
     events = Event.objects.select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
     if c_id:
         events = events.filter(category_id=c_id)
     
+    if start_date and end_date:
+        events = events.filter(date__range=[start_date, end_date])
 
-    # counts = Event.objects.aggregate(
-    #     total_events = Count('id'),
-    #     upcoming_events_count = Count('id', filter= Q(date__gte=today)),
-    #     past_events_count = Count('id', filter= Q(date__lt=today))
-    # )
     context = {
-        'events': events,
-        # 'counts': counts,
-        "all_participants": all_participants,
-        "all_participants_count": all_participants_count,
+        'events': events
         }
 
     return render(request, "home.html", context)
-# def show_events(request):
-#     return HttpResponse("Welcome to the event management system")
- # participants = Participant.objects.all()
-    # categories = Category.objects.all()
-    # form = EventModelForm(participants = participants, categories = categories)
+
+
+def event_detail(request, id):
+
+    event = Event.objects.filter(id=id).select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
+    
+    context = {'event': event.first()}
+    return render(request, "event_detail.html", context)
+    
 
 def create_event(request):
    
@@ -94,10 +90,6 @@ def delete_event(request, id):
     else:
         messages.success(request, 'Something went wrong')
         return redirect('organizer-dashboard')
-
-
-
-
 
 
 
@@ -167,3 +159,4 @@ def organizer_dashboard(request):
 #         }
 
 #     return render(request, "organizer-dashboard.html", context) 
+
