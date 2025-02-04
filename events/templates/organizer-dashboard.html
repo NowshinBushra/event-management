@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -80,7 +80,8 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.total_events }}</p>
-                <a class="text-gray-500 text-sm" href="{% url 'organizer-dashboard' %}">Click here to see</a>
+                <a class="text-gray-500 text-sm {% if request.GET.type == 'total events' %}text-red-600{% endif %}" 
+                  href="{% url 'organizer-dashboard' %}?type=total events">Click here to see</a>
               </div>
               <div class="bg-blue-100 p-3 rounded-full">
                 <svg
@@ -108,7 +109,8 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.upcoming_events_count }}</p>
-                <a class="text-gray-500 text-sm" href="{% url 'organizer-dashboard' %}?type=upcoming events">Click here to see</a>
+                <a class="text-gray-500 text-sm {% if request.GET.type == 'upcoming events' %}text-red-600{% endif %}"
+                  href="{% url 'organizer-dashboard' %}?type=upcoming events">Click here to see</a>
               </div>
               <div class="bg-yellow-100 p-3 rounded-full">
                 <svg
@@ -134,7 +136,8 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.past_events_count }}</p>
-                <a class="text-gray-500 text-sm" href="{% url 'organizer-dashboard' %}?type=past events">Click here to see</a>
+                <a class="text-gray-500 text-sm {% if request.GET.type == 'past events' %}text-red-600{% endif %}" 
+                  href="{% url 'organizer-dashboard' %}?type=past events">Click here to see</a>
               </div>
               <div class="bg-green-100 p-3 rounded-full">
                 <svg

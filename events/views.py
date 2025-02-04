@@ -95,6 +95,7 @@ def delete_event(request, id):
 
 def organizer_dashboard(request):
     type = request.GET.get('type','all')
+    print(type)
 
     today = now().date()
     todays_event = Event.objects.filter(date=today)
@@ -110,6 +111,8 @@ def organizer_dashboard(request):
         events = base_query.filter(date__gte=today)
     elif type == 'past events':
         events = base_query.filter(date__lt=today)
+    elif type == 'total events':
+        events = base_query.all()
     elif type == 'all_participants':
         events = all_participants
 
