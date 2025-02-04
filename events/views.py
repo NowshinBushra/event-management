@@ -7,16 +7,6 @@ from events.forms import EventModelForm
 from events.models import Event, Participant, Category
 from django.contrib import messages
 
-# Create your views here.
-
-# def home(request):
-#     # events = Event.objects.all()
-#     ps = Event.objects.prefetch_related('participants').all()
-#     events = Event.objects.annotate(participant_count=Count('participants'))
-#     return render(request, "home.html", {
-#         "events": events,
-#         'ps' : ps
-#         })
 
 
 def events_by_category(request):
@@ -34,8 +24,22 @@ def events_by_category(request):
     context = {
         'events': events
         }
-
     return render(request, "home.html", context)
+
+
+
+def show_events(request):
+    search = request.GET.get('search', '')
+    # print(search)
+    events = Event.objects.select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
+
+    if search:
+        events = events.filter(title__icontains=search) | events.filter(location__icontains=search)
+    
+    context = {
+        'events': events, 'search': search
+        }
+    return render(request, "show_events.html", context)
 
 
 def event_detail(request, id):
@@ -46,8 +50,8 @@ def event_detail(request, id):
     return render(request, "event_detail.html", context)
     
 
-def create_event(request):
-   
+
+def create_event(request): 
     form = EventModelForm()
 
     if request.method == "POST":
@@ -66,6 +70,7 @@ def create_event(request):
     return render(request, "event_form.html", context)
 
 
+
 def update_event(request, id):
     event = Event.objects.get(id=id)
     form = EventModelForm(instance=event)
@@ -80,6 +85,8 @@ def update_event(request, id):
 
     context = {"form": form}
     return render(request, "event_form.html", context)
+
+
 
 def delete_event(request, id):
     if request.method =="POST":
@@ -115,7 +122,6 @@ def organizer_dashboard(request):
         events = base_query.all()
     elif type == 'all_participants':
         events = all_participants
-
     
 
     counts = Event.objects.aggregate(
@@ -133,33 +139,4 @@ def organizer_dashboard(request):
         }
 
     return render(request, "organizer-dashboard.html", context)
-
-
-# def view_events(request):
-#     today = now().date()
-#     total_events = Event.objects.count()
-#     todays_event = Event.objects.filter(date=today)
-
-#     upcoming_events = Event.objects.filter(date__gte=today)
-#     upcoming_events_count = upcoming_events.count()
-
-#     past_events = Event.objects.filter(date__lt=today)
-#     past_events_count = past_events.count()
-
-#     all_participants = Participant.objects.all()
-#     all_participants_count = all_participants.count()
-
-#     context = {
-#         "todays_event": todays_event,
-#         'total_events': total_events,
-
-#         "upcoming_events": upcoming_events,
-#         "upcoming_events_count": upcoming_events_count,
-#         "past_events": past_events,
-#         "past_events_count": past_events_count,
-#         "all_participants": all_participants,
-#         "all_participants_count": all_participants_count,
-#         }
-
-#     return render(request, "organizer-dashboard.html", context) 
 

@@ -8,5 +8,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
     path('events/', include('events.urls')),
-    # path('participants', include('participants.urls')),
 ] + debug_toolbar_urls()

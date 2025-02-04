@@ -11,44 +11,7 @@
     {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
 </head>
 <body>
-    <header class="bg-white shadow-md">
-        <nav class="container mx-auto px-6 py-3">
-          <div class="flex justify-between items-center">
-            <div class="text-2xl italic font-bold text-yellow-800">Evento</div>
-            <div class="md:flex space-x-4">
-              <a href="#" class="text-yellow-700 hover:font-medium">Home</a>
-              <a href="{% url 'organizer-dashboard' %}" class="text-yellow-700 hover:font-medium">Dashboard</a>
-              <a href="events/" class="text-yellow-700 hover:font-medium">Events</a>
-              <a href="{% url 'create-event' %}" class="text-yellow-700 hover:font-medium">Create Event</a>
-              <a href="#" class="text-yellow-700 hover:font-medium">About</a>
-            </div>
-            
-            <div class="flex gap-1">
-              
-            </div>
-          </div>
-          <div id="" class="md:hidden hidden mt-4">
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              >Home</a
-            >
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              >Dashboard</a
-            >
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              ></a
-            >
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              >Events</a
-            >
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              >About</a
-            >
-            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800"
-              >Create Event</a
-            >
-          </div>
-        </nav>
-      </header>
+  {% include "navbar.html" %}
       <main>
         {% comment %} Banner {% endcomment %}
         <div class="h-96 w-full text-center text-yellow-950 banner">
@@ -56,20 +19,19 @@
           <h5 class="text-xl py-7">Technology || Corporate Event || Exhibition Stall || Music</h5>
           
           <div class="flex justify-center">
-            <div class="w-1/5 max-w-sm">
-              <div class="relative shadow-xl rounded border border-amber-900">
-                <input class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..."/>
-                <button class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="button">
+            
+              <div class="w-1/6 max-w-sm -me-16 shadow-xl p-1.5 rounded border border-white">
+                <a href="{% url 'show-events' %}" class="top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
              
-                  Search
-                </button> 
+                  Search events...
+                </a> 
               </div>
-            </div>
-            <div class="w-1/4 max-w-sm">
-              <button class="bg-yellow-700 hover:font-medium shadow-xl border py-2 px-8 border-white text-center text-sm text-white">PLAN YOUR EVENT</button>
+            
+            <div class="w-1/5 max-w-sm">
+              <button class="bg-yellow-700 hover:font-medium shadow-xl border py-2 px-8 border-white text-center text-sm text-white"><a href="{% url 'create-event' %}">PLAN YOUR EVENT</a></button>
             </div>
           </div>
         </div>

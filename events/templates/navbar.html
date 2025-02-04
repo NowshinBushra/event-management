@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/005f451dab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-3">
+          <div class="flex justify-between items-center">
+            <div class="text-2xl italic font-bold text-yellow-800">Evento</div>
+            <div class="md:flex space-x-4">
+              <a href="/events" class="text-yellow-700 hover:font-medium">Home</a>
+              <a href="{% url 'organizer-dashboard' %}" class="text-yellow-700 hover:font-medium">Dashboard</a>
+              <a href="{% url 'show-events' %}" class="text-yellow-700 hover:font-medium">Events</a>
+              <a href="{% url 'create-event' %}" class="text-yellow-700 hover:font-medium">Create Event</a>
+              <a href="#" class="text-yellow-700 hover:font-medium">About</a>
+            </div>
+          </div>
+            
+            
+          <div id="" class="md:hidden hidden mt-4">
+            <a href="#" class="block py-2 text-gray-600 hover:text-gray-800">Home</a>
+            <a href="{% url 'organizer-dashboard' %}" class="block py-2 text-gray-600 hover:text-gray-800">Dashboard</a>
+            <a href="{% url 'show-events' %}" class="block py-2 text-gray-600 hover:text-gray-800">Events</a>
+            <a href="{% url 'create-event' %}" class="block py-2 text-gray-600 hover:text-gray-800">Create Event</a>
+          </div>
+        </nav>
+      </header>
+</body>
+</html>

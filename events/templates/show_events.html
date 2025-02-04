@@ -4,59 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div>
-        <p><strong>Total Participants:</strong> {{ all_participants_count }}</p>
-        <p><strong>Total Events:</strong> {{ total_events }}</p>
-        <p><strong>Upcoming Events:</strong> {{ upcoming_events_count }}</p>
-        <p><strong>Past Events:</strong> {{ past_events_count }}</p>
-    </div>
-    <div>
-        <ul><p>Todays Event</p>
-            {% for event in todays_event %}
-            <li>
-                {{event}}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <ul><p>All Events</p>
+    {% include "navbar.html" %}
+    <main>
+            <div class="flex justify-end me-80 my-10">
+                <div class="w-1/5 max-w-sm">
+                  <div class="relative shadow-xl rounded border border-amber-900">
+                    <form method="GET" action="{% url 'show-events' %}">
+
+                        {% comment %} <input type="text" name="search" placeholder="Search events..." value="{{ search }}"
+                        class="border p-2 rounded-lg w-full">
+                    <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded-lg">Search</button> {% endcomment %}
+
+                    <input type="text" name="search" value="{{ search }}" class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..."/>
+                    <button class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
+                        <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+                      </svg>
+                 
+                      Search
+                    </button> 
+                </form>
+                  </div>
+                </div>
+                
+              </div>
+        <div>
             {% for event in events %}
-            <li>
-                {{event}}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <ul><p>Upcoming Events</p>
-            {% for event in upcoming_events %}
-            <li>
-                {{event}}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <ul><p>Past Events</p>
-            {% for event in past_events %}
-            <li>
-                {{event}}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <ul><p>Total Participants</p>
-            {% for participant in all_participants %}
-            <li>
-                {{participant}}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+              <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
+                <div>
+                  <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
+                  <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
+                  <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
+                </div>
+                <div>
+                <a class="bg-yellow-600 rounded p-6 shadow-sm" href="{% url 'event-detail' event.id%}">Ticket and details</a>
+                </div>
+              </div>
+              {% endfor %}
+        </div>
+    </main>
     
 </body>
 </html>
