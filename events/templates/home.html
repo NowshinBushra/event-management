@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Management</title>
-   
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/005f451dab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
 </head>
 <body>
     <header class="bg-white shadow-md">
         <nav class="container mx-auto px-6 py-3">
           <div class="flex justify-between items-center">
-            <div class="text-xl font-bold text-gray-800">Evento</div>
+            <div class="text-2xl italic font-bold text-yellow-800">Evento</div>
             <div class="md:flex space-x-4">
-              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
-              <a href="{% url 'organizer-dashboard' %}" class="text-gray-600 hover:text-gray-800">Dashboard</a>
-              <a href="events/" class="text-gray-600 hover:text-gray-800">Events</a>
-              <a href="{% url 'create-event' %}" class="text-gray-600 hover:text-gray-800">Create Event</a>
-              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+              <a href="#" class="text-yellow-700 hover:font-medium">Home</a>
+              <a href="{% url 'organizer-dashboard' %}" class="text-yellow-700 hover:font-medium">Dashboard</a>
+              <a href="events/" class="text-yellow-700 hover:font-medium">Events</a>
+              <a href="{% url 'create-event' %}" class="text-yellow-700 hover:font-medium">Create Event</a>
+              <a href="#" class="text-yellow-700 hover:font-medium">About</a>
             </div>
             
             <div class="flex gap-1">
@@ -48,6 +50,35 @@
         </nav>
       </header>
       <main>
+        {% comment %} Banner {% endcomment %}
+        {% comment %} <div class="h-96 text-center text-yellow-950 bg-gradient-to-r from-zinc-400 via-orange-200 to-zinc-400"> {% endcomment %}
+        <div class="h-96 w-full text-center text-yellow-950 banner">
+          <h1 class="text-6xl font-semibold pt-20">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
+          <h5 class="text-xl py-7">Technology || Corporate Event || Exhibition Stall || Music</h5>
+          
+          <div class="flex justify-center">
+            <div class="w-1/5 max-w-sm">
+              <div class="relative shadow-xl rounded border border-amber-900">
+                <input
+                  class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..." 
+                />
+                <button
+                  class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white "
+                  type="button"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
+                    <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+                  </svg>
+             
+                  Search
+                </button> 
+              </div>
+            </div>
+            <div class="w-1/4 max-w-sm">
+              <button class="bg-yellow-700 hover:font-medium shadow-xl border py-2 px-8 border-white text-center text-sm text-white">PLAN YOUR EVENT</button>
+            </div>
+          </div>
+        </div>
         <div>
           <div>
             <ul><p>All Events</p>
@@ -65,6 +96,130 @@
             </ul>
         </div>
         </div>
+
+        {% comment %} Event by category {% endcomment %}
+        <div class='bg-indigo-900 px-3 pt-8'>
+          <h1 class="text-3xl font-semibold py-6 text-center text-orange-300">Event by Category</h1>
+          <div class="grid grid-cols-4 gap-6 mb-4">
+            {% comment %}  {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=1"
+              class="{% if request.GET.category == '1' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
+                <h3 class="text-lg font-medium text-yellow-600">TECHNOLOGY</h3>
+                  <div class="bg-yellow-100 p-3 rounded-full">
+                    <svg
+                     xmlns="http://www.w3.org/2000/svg" 
+                     fill="none" 
+                     viewBox="0 0 24 24" 
+                     stroke-width="1.5" 
+                     stroke="currentColor" 
+                     class="size-6">
+                      <path
+                       stroke-linecap="round" 
+                       stroke-linejoin="round" 
+                       d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                    </svg>
+                  </div>
+              </div>
+            </a>
+            {% comment %} CORPORATE EVENTS {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=2"
+              class="{% if request.GET.category == '2' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
+                <h3 class="text-lg font-medium text-yellow-600">CORPORATE EVENTS</h3>
+                  <div class="bg-yellow-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                    </svg>
+                  </div>
+              </div>
+            </a>
+            {% comment %} EXHIBITION STALL {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=3"
+            class="{% if request.GET.category == '3' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
+                <h3 class="text-lg font-medium text-yellow-600">
+                  EXHIBITION STALL
+                </h3>
+                  <div class="bg-yellow-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
+                    </svg>
+                  </div>
+              </div>
+            </a>
+            {% comment %} MUSIC {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=4"
+            class="{% if request.GET.category == '4' %}border-b-4 border-blue-800{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
+                <h3 class="text-lg font-medium text-yellow-600">MUSIC</h3>
+                  <div class="bg-yellow-100 p-3 rounded-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                  </div>
+              </div>
+            </a>
+          </div>
+        
+
+        {% for event in events %}
+        <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
+          <div>
+            <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
+            <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
+            <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
+          </div>
+          <div>
+            <a class="bg-yellow-600 rounded p-6 shadow-sm" href="">Ticket and details</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+        {% comment %} Dynamic Events {% endcomment %}
+
+        {% comment %} <div class="bg-white p-6 rounded-lg shadow">
+          
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-gray-500">
+                <th class="pb-2">EVENT TITLE</th>
+                <th class="pb-2">DATE</th>
+                <th class="pb-2">LOCATION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for event in events %}
+            <tr>
+              <td class="py-2">
+                <div class="flex items-center">
+                  <span
+                    class="w-2 h-2 bg-green-500 rounded-full mr-2"
+                  ></span>
+                  <span>{{event}}</span>
+                </div>
+              </td>
+              <td class="py-2 text-sm text-gray-500">{{event.date}}</td>
+              <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
+            </tr>
+              {% endfor %} {% endcomment %}
+              
+            </tbody>
+          </table>
+        </div>
+
       </main>
 </body>
 </html>

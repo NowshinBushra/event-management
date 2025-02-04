@@ -41,18 +41,13 @@
               />
             </svg>
           </button>
-          <button
-            class="w-10 h-10 bg-blue-500 rounded-full text-white font-semibold"
-          >
-            B
-          </button>
         </div>
       </header>
 
       <main>
         <!-- Stats Grid  -->
         <div class="grid grid-cols-4 gap-6 mb-8">
-          <!-- Total Task  -->
+          <!-- Total PARTICIPANTS  -->
           <div class="bg-white rounded-xl p-6 shadow-sm">
             <h3 class="text-sm font-medium text-gray-500 mb-4">TOTAL PARTICIPANTS</h3>
             <div class="flex justify-between items-start">
@@ -79,7 +74,7 @@
               </div>
             </div>
           </div>
-          <!-- Completed Task  -->
+          <!-- TOTAL EVENTS  -->
           <div class="bg-white rounded-xl p-6 shadow-sm">
             <h3 class="text-sm font-medium text-gray-500 mb-4">TOTAL EVENTS</h3>
             <div class="flex justify-between items-start">
@@ -105,7 +100,7 @@
               </div>
             </div>
           </div>
-          <!-- Task In Progress  -->
+          <!-- UPCOMING EVENTS  -->
           <div class="bg-white rounded-xl p-6 shadow-sm">
             <h3 class="text-sm font-medium text-gray-500 mb-4">
               UPCOMING EVENTS
@@ -133,6 +128,7 @@
               </div>
             </div>
           </div>
+          <!-- PAST EVENTS  -->
           <div class="bg-white rounded-xl p-6 shadow-sm">
             <h3 class="text-sm font-medium text-gray-500 mb-4">PAST EVENTS</h3>
             <div class="flex justify-between items-start">
@@ -166,7 +162,7 @@
                 <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-500{% endif %} ">{{message}}</div>
             {% endfor %}
         {% endif %}
-        <!-- Task Table  -->
+        <!-- Today's Events  -->
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="bg-white p-6 rounded-lg shadow">
