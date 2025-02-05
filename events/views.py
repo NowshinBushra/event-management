@@ -65,6 +65,8 @@ def create_event(request):
 
             messages.success(request, "Event added successfully")
             return redirect('create-event')
+        else:
+            messages.error(request, "Please correct the errors below.")
 
     context = {"form": form}
     return render(request, "event_form.html", context)
@@ -82,6 +84,8 @@ def update_event(request, id):
 
             messages.success(request, "Event updated successfully")
             return redirect('update-event', id)
+        else:
+            messages.error(request, "Please correct the errors below.")
 
     context = {"form": form}
     return render(request, "event_form.html", context)

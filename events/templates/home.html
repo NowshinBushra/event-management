@@ -14,33 +14,31 @@
   {% include "navbar.html" %}
       <main>
         {% comment %} Banner {% endcomment %}
-        <div class="h-96 w-full text-center text-yellow-950 banner">
-          <h1 class="text-6xl font-semibold pt-20">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
-          <h5 class="text-xl py-7">Technology || Corporate Event || Exhibition Stall || Music</h5>
+        <div class="banner h-96 w-full text-center text-yellow-50 flex flex-col justify-center px-4 bg-cover bg-center">
+          <h1 class="text-4xl md:text-6xl font-semibold">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
+          <h5 class="text-lg md:text-xl py-4">Technology || Corporate Event || Exhibition Stall || Music</h5>
           
-          <div class="flex justify-center">
+          <div class="flex flex-col md:flex-row justify-center gap-4">
             
-              <div class="w-1/6 max-w-sm -me-16 shadow-xl p-1.5 rounded border border-white">
-                <a href="{% url 'show-events' %}" class="top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="button">
+              
+                <a href="{% url 'show-events' %}" class="flex items-center rounded border border-white bg-yellow-700 py-1 px-6 text-center text-sm text-white shadow-lg" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
              
                   Search events...
                 </a> 
-              </div>
+              
+                <a href="{% url 'create-event' %}" class="bg-yellow-700 hover:font-medium shadow-xl rounded border py-2 px-8 border-white text-center text-sm text-white">PLAN YOUR EVENT</a>
             
-            <div class="w-1/5 max-w-sm">
-              <button class="bg-yellow-700 hover:font-medium shadow-xl border py-2 px-8 border-white text-center text-sm text-white"><a href="{% url 'create-event' %}">PLAN YOUR EVENT</a></button>
-            </div>
           </div>
         </div>
   
 
         {% comment %} Event by category {% endcomment %}
-        <div class='bg-indigo-100 px-3 pb-8'>
-          <h1 class="text-3xl font-semibold py-6 text-center text-yellow-700">Event by Category</h1>
-          <div class="grid grid-cols-4 gap-6 mb-4">
+        <div class='bg-stone-100 px-3 pb-8'>
+          <h1 class="text-2xl md:text-3xl font-semibold py-6 text-center text-yellow-700">Event by Category</h1>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             
             {% comment %} TECHNOLOGY {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=1"
@@ -115,41 +113,35 @@
             
           </div>
             {% comment %} search by date {% endcomment %}
-            <form method="GET">
-            <div class="flex justify-end  mx-10">
-              <div class="">
-                <div class="flex gap-4 bg-white px-4 py-1 rounded-lg shadow-md">
-                  <div class="flex items-center flex-row">
+            <form method="GET" class="flex justify-end mt-6 mx-10">
+                <div class="flex flex-col md:flex-row gap-4 bg-white px-4 py-2 rounded-lg shadow-md">
+                  <div class="flex items-center">
                     <label class="text-gray-700 font-medium" for="start_date">Start_Date: </label>
                     <input class="text-gray-400 border rounded-lg p-2" type="date" name="start_date">
                   </div>
     
-                  <div class="flex items-center flex-row">
+                  <div class="flex items-center">
                     <label class=" text-gray-700 font-medium" for="end_date">End_Date: </label>
                     <input class="text-gray-400 border rounded-lg p-2" type="date" name="end_date">
                   </div>
     
-                  <button class="bg-blue-600 text-white px-6 rounded-sm shadow hover:bg-blue-700" type="submit">Filter</button>
+                  <button class="bg-blue-500 text-white px-6 py-2 rounded-sm shadow hover:bg-blue-600" type="submit">Filter</button>
                 </div>
-              </div>
-            </div>
+            </form> 
             
-
-
           {% comment %} Dynamic Events {% endcomment %}
           {% for event in events %}
-          <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
+          <div class="flex flex-col md:flex-row justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-4 md:mx-32 lg:mx-96">
             <div>
-              <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
+              <h2 class="text-lg "><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
               <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
               <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
             </div>
-            <div>
-            <a class="bg-yellow-600 rounded p-6 shadow-sm" href="{% url 'event-detail' event.id%}">Ticket and details</a>
+            <div class="mt-4 md:mt-0">
+            <a class="bg-yellow-600 text-white px-4 py-2 rounded shadow-sm hover:bg-yellow-700" href="{% url 'event-detail' event.id%}">Ticket and details</a>
             </div>
           </div>
           {% endfor %}
-        </form> 
         </div>
         
       </main>

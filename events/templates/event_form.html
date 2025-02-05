@@ -12,9 +12,6 @@
     {% include "navbar.html" %}
     <div class="w-1/2 mx-auto mt-8">
     <div>
-        {% comment %} {% if message %}
-            <p>{{message}}</p>
-        {% endif %} {% endcomment %}
         {% if messages %}
             {% for message in messages %}
                 <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-500{% endif %} ">{{message}}</div>

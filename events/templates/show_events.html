@@ -8,15 +8,11 @@
 </head>
 <body>
     {% include "navbar.html" %}
-    <main>
-            <div class="flex justify-end me-80 my-10">
-                <div class="w-1/5 max-w-sm">
+    <main class="container mx-auto p-4">
+      <div class="flex justify-center md:justify-end my-6 lg:my-10 lg:me-80">
+                <div class="w-full max-w-xs md:max-w-sm">
                   <div class="relative shadow-xl rounded border border-amber-900">
                     <form method="GET" action="{% url 'show-events' %}">
-
-                        {% comment %} <input type="text" name="search" placeholder="Search events..." value="{{ search }}"
-                        class="border p-2 rounded-lg w-full">
-                    <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded-lg">Search</button> {% endcomment %}
 
                     <input type="text" name="search" value="{{ search }}" class="w-full text-slate-800 text-sm pl-3 py-2 shadow-sm" placeholder="search events..."/>
                     <button class="absolute top-1 right-1 flex items-center rounded bg-yellow-700 py-1 px-2.5 text-center text-sm text-white " type="submit">
@@ -26,25 +22,24 @@
                  
                       Search
                     </button> 
-                </form>
+                    </form>
                   </div>
                 </div>
                 
               </div>
-        <div>
+              {% comment %} Events List {% endcomment %}
+        <div class="grid grid-cols-1 gap-6">
             {% for event in events %}
-              <div class="flex justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-96">
-                <div>
+              <div class="flex flex-col md:flex-row justify-between items-center shadow-lg bg-amber-100 p-6 md:p-8 my-4 mx-4 md:mx-10 lg:mx-96">
+                <div class="mb-4 md:mb-0">
                   <h2><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
                   <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
                   <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
                 </div>
-                <div>
-                <a class="bg-yellow-600 rounded p-6 shadow-sm" href="{% url 'event-detail' event.id%}">Ticket and details</a>
-                </div>
+                <a class="bg-yellow-600 rounded-md py-2 px-6 lg:p-6 shadow-sm hover:bg-yellow-700" href="{% url 'event-detail' event.id%}">Ticket and details</a>
               </div>
               {% endfor %}
-        </div>
+      </div>
     </main>
     
 </body>
