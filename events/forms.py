@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event, Participant
+from events.models import Event, Participant, Category
 
 
 class StyledFormMixin:
@@ -64,3 +64,17 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
             'time': forms.TimeInput(attrs={'type': 'time'}), 
             'category': forms.Select
             }
+        
+
+
+class CategoryModelForm(StyledFormMixin, forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'description']
+
+        
+class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ['name', 'email']
+        

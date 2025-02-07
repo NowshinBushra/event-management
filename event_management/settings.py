@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
@@ -97,6 +98,7 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
 # For Postgres 
 # DATABASES = {
 #     'default': {
