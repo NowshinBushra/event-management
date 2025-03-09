@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'participants',
+    'users',
     "debug_toolbar",
 ]
 
@@ -91,25 +92,26 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://event_manager_db_oi48_user:Vo8xrCKe91wAYFQET7qjWire34GqRZ82@dpg-cuhlid23esus73clg3q0-a.oregon-postgres.render.com/event_manager_db_oi48',
-        conn_max_age=600
-    )
-}
+# for render
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://event_manager_db_oi48_user:Vo8xrCKe91wAYFQET7qjWire34GqRZ82@dpg-cuhlid23esus73clg3q0-a.oregon-postgres.render.com/event_manager_db_oi48',
+#         conn_max_age=600
+#     )
+# }
 
 # For Postgres 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event_management',
-#         'USER': 'postgres',
-#         'PASSWORD': 'pgs#n',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'event_management',
+        'USER': 'postgres',
+        'PASSWORD': 'pgs#n',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 
 
