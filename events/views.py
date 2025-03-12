@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from events.forms import EventModelForm, CategoryModelForm, ParticipantModelForm
 from events.models import Event, Participant, Category
 from django.contrib import messages
-
+from core.views import home
 
 
 def events_by_category(request):
