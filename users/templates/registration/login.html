@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h2>Welcome to Auth</h2>
-    <form action="" method="POST">
-        {% csrf_token %}
-
-        <input type="text" placeholder="Enter your username" name="username">
-        <input type="password" placeholder="Enter your password" name="password">
-        <button type="submit">Sign In</button>
-    </form>
+    <div class='mx-48 mt-36'>
+        <div>
+            <h2>Welcome to Auth</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-400 text-white font-medium{% endif %} ">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+        
+        {% if form.non_field_errors %}                  
+            {% for error in form.non_field_errors %}
+               {{error}}
+            {% endfor %}                    
+        {% endif %}
+    
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button class='bg-amber-600 text-white px-8 py-1 rounded-sm mt-4' type="submit">Sign In</button>
+        </form>
+        </div>
+    </div>
 </body>
 </html>

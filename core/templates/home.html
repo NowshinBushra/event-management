@@ -30,6 +30,18 @@
 <body>
   {% include "navbar.html" %}
       <main>
+        <div>
+            {% if user.is_authenticated %}
+                {{ user }}
+                <form action="{% url 'sign-out' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                Anonymous
+            {% endif %}
+        </div>
+        
         {% comment %} Banner {% endcomment %}
         <div class="banner h-96 w-full text-center text-yellow-50 flex flex-col justify-center py-96 px-4 bg-cover bg-center">
           <h1 class="text-4xl py-6 md:text-6xl font-semibold text-yellow-50">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
