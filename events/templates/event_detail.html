@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    {% include "navbar.html" %}
+{% extends "base.html" %}
+{% block content %}
     <div class="bg-slate-400 text-white font-semibold mx-4 my-10 md:m-20 lg:mx-60 lg:my-30 p-6 md:p-10 lg:p-44  shadow-md">
         <div class="">
             <h2 class="text-xl font-bold"><span class="text-yellow-200">Event Title: </span>{{ event.title }}</h2>
@@ -23,7 +15,6 @@
             <span class="bg-yellow-50 px-4 py-2 mx-1">Date: {{ event.date }}</span>
             <span class="bg-yellow-50 px-4 py-2 mx-1">time: {{ event.time }}</span>
             <span class="bg-yellow-50 px-4 py-2 mx-1">location: {{ event.location }}</span>
-
+        </div>
     </div>
-</body>
-</html>
+    {% endblock content %}

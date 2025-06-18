@@ -85,7 +85,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'event_management.wsgi.application'
 
 
-# Database
+# for SQLite Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # DATABASES = {
@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 
 # for render
 # DATABASES = {
@@ -108,11 +109,17 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default=''),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', cast=int)
+        'NAME': 'event_management',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+
+        # 'NAME': config('DB_NAME', default=''),
+        # 'USER': config('DB_USER', default=''),
+        # 'PASSWORD': config('DB_PASSWORD', default=''),
+        # 'HOST': config('DB_HOST', default='localhost'),
+        # 'PORT': config('DB_PORT', cast=int)
     }
 }
 
@@ -172,3 +179,5 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 FRONTEND_URL = 'http://127.0.0.1:8000'
+
+LOGIN_URL = "sign-in"

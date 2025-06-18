@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <h1>w to auth</h1>
-    <div>
+{% extends "base.html" %}
+{% block content %}
+    <div class='mx-auto w-1/2 my-9'>
+        <h1 class='text-xl md:text-2xl font-semibold py-6 text-center text-yellow-700'>Welcome to Evento</h1>
+        <div>
         {% if form.non_field_errors %}                  
             {% for error in form.non_field_errors %}
                {{error}}
@@ -33,8 +27,8 @@
             </p>
             {% endfor %}
 
-            <button type="submit">Sign Up</button>
+            <button class='bg-yellow-600 text-white px-8 py-1 rounded-sm mt-4' type="submit" type="submit">Sign Up</button>
         </form>
+        </div>
     </div>
-</body>
-</html>
+    {% endblock content %}

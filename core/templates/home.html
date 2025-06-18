@@ -1,47 +1,6 @@
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>welcome home</h1>
-    {% if user.is_authenticated %}
-        {{ user }}
-    {% else %}
-        Anonymous
-    {% endif %}
-</body>
-</html> {% endcomment %}
-
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/005f451dab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
-</head>
-<body>
-  {% include "navbar.html" %}
-      <main>
-        <div>
-            {% if user.is_authenticated %}
-                {{ user }}
-                <form action="{% url 'sign-out' %}" method="POST">
-                  {% csrf_token %}
-                  <button type="submit">Logout</button>
-                </form>
-            {% else %}
-                Anonymous
-            {% endif %}
-        </div>
-        
+{% extends "base.html" %}
+{% block content %}
+       
         {% comment %} Banner {% endcomment %}
         <div class="banner h-96 w-full text-center text-yellow-50 flex flex-col justify-center py-96 px-4 bg-cover bg-center">
           <h1 class="text-4xl py-6 md:text-6xl font-semibold text-yellow-50">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
@@ -172,7 +131,4 @@
           </div>
           {% endfor %}
         </div>
-        
-      </main>
-</body>
-</html>
+      {% endblock content %}

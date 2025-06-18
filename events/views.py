@@ -7,6 +7,15 @@ from events.forms import EventModelForm, CategoryModelForm, ParticipantModelForm
 from events.models import Event, Participant, Category
 from django.contrib import messages
 from core.views import home
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+
+
+def is_organizer(user):
+    return user.groups.filter(name='Organizer').exists()
+
+
+def is_participant(user):
+    return user.groups.filter(name='Participant').exists()
 
 
 def events_by_category(request):
@@ -73,6 +82,8 @@ def event_detail(request, id):
 
 # 
 
+@login_required
+@permission_required("events.add_event", login_url='no-permission')
 def create_event(request):
     event_form = EventModelForm()
     category_form = CategoryModelForm()
@@ -113,6 +124,8 @@ def create_event(request):
     return render(request, "event_form.html", context)
 
 
+@login_required
+@permission_required("events.change_event", login_url='no-permission')
 def update_event(request, id):
     event = Event.objects.get(id=id)
     event_form = EventModelForm(instance=event)
@@ -141,7 +154,8 @@ def update_event(request, id):
     return render(request, "event_form.html", context)
 
 
-
+@login_required
+@permission_required("events.delete_event", login_url='no-permission')
 def delete_event(request, id):
     if request.method =="POST":
         event = Event.objects.get(id=id)
@@ -154,9 +168,9 @@ def delete_event(request, id):
 
 
 
+# @user_passes_test(is_organizer, login_url='no-permission')
 def organizer_dashboard(request):
     type = request.GET.get('type','all')
-    print(type)
 
     today = now().date()
     todays_event = Event.objects.filter(date=today)

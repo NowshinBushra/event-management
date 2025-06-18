@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class='mx-48 mt-36'>
+{% extends "base.html" %}
+{% block content %}
+    <div class='mx-auto w-1/2 my-9'>
         <div>
-            <h2>Welcome to Auth</h2>
+            <h2 class='text-xl md:text-2xl font-semibold py-6 text-center text-yellow-700'>Welcome back to Evento</h2>
         {% if messages %}
             {% for message in messages %}
                 <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-400 text-white font-medium{% endif %} ">{{message}}</div>
@@ -18,16 +11,15 @@
         
         {% if form.non_field_errors %}                  
             {% for error in form.non_field_errors %}
-               {{error}}
+               <p></p>
             {% endfor %}                    
         {% endif %}
     
         <form action="" method="POST">
             {% csrf_token %}
             {{ form }}
-            <button class='bg-amber-600 text-white px-8 py-1 rounded-sm mt-4' type="submit">Sign In</button>
+            <button class='bg-yellow-600 text-white px-8 py-1 rounded-sm mt-4' type="submit">Sign In</button>
         </form>
         </div>
     </div>
-</body>
-</html>
+    {% endblock content %}
