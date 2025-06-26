@@ -1,5 +1,6 @@
 from django import forms
-from events.models import Event, Participant, Category
+from events.models import Event, Category #, Participant
+from django.contrib.auth.models import User
 
 
 class StyledFormMixin:
@@ -9,7 +10,7 @@ class StyledFormMixin:
         super().__init__(*arg, **kwarg)
         self.apply_styled_widgets()
 
-    default_classes = "border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500"
+    default_classes = "border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
 
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
@@ -26,16 +27,16 @@ class StyledFormMixin:
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):
                 field.widget.attrs.update({
-                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500"
+                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
                 })
             elif isinstance(field.widget, forms.TimeInput):
                 field.widget.attrs.update({
-                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 focus:ring-rose-500"
+                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
                 })
             elif isinstance(field.widget, forms.Select):
                 field.widget.attrs.update({
                     'class': f"{self.default_classes} space-y-2 text-green",
-                    'placeholder':  f"Select {field.label.lower()}",
+                    'placeholder':  f"Select {field.label}",
                 })
             elif isinstance(field.widget, forms.CheckboxSelectMultiple):
                 field.widget.attrs.update({
@@ -50,7 +51,8 @@ class StyledFormMixin:
 class EventModelForm(StyledFormMixin, forms.ModelForm):
 
     participants = forms.ModelMultipleChoiceField(
-        queryset=Participant.objects.all(),
+        # queryset=Participant.objects.all(),
+        queryset=User.objects.filter(groups__name='User'), #======================pchange
         widget=forms.CheckboxSelectMultiple,
         required=True
     )
@@ -73,8 +75,8 @@ class CategoryModelForm(StyledFormMixin, forms.ModelForm):
         fields = ['name', 'description']
 
         
-class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ['name', 'email']
+# class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
+    # class Meta:
+    #     model = Participant
+    #     fields = ['name', 'email']
         

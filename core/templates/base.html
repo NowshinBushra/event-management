@@ -11,11 +11,19 @@
     {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
 </head>
 <body>
-  {% include "non_logged_nav.html" %}
+  {% if request.user.is_authenticated %}
+        {% include "logged_nav.html" %}
+  {% else %}
+        {% include "non_logged_nav.html" %}
+  {% endif %}
+  
+  
       <main>
         {% block content %}
         
         {% endblock content %}
       </main>
+
+      
 </body>
 </html>

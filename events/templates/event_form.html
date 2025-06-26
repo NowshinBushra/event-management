@@ -33,7 +33,7 @@
             </form>
             </div>
 
-            <div>
+            {% comment %} <div>
                 <h2 class="font-semibold text-xl text-yellow-700 py-2">Add New Participant</h2>
             <form method="POST">
                 {% csrf_token %}
@@ -41,7 +41,7 @@
             
                 <button type="submit" name="add_participant" class="font-semibold border-4 border-yellow-600 text-yellow-600 px-4 py-2 rounded">Add Participant</button>
             </form>
-            </div>
+            </div> {% endcomment %}
 
         </div>
     

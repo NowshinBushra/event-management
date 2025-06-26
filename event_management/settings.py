@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
-    'participants',
     'users',
     "debug_toolbar",
     "core",
@@ -109,17 +108,17 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'event_management',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        # 'NAME': 'event_management',
+        # 'USER': 'postgres',
+        # 'PASSWORD': '1234',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
 
-        # 'NAME': config('DB_NAME', default=''),
-        # 'USER': config('DB_USER', default=''),
-        # 'PASSWORD': config('DB_PASSWORD', default=''),
-        # 'HOST': config('DB_HOST', default='localhost'),
-        # 'PORT': config('DB_PORT', cast=int)
+        'NAME': config('DB_NAME', default=''),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', cast=int)
     }
 }
 
@@ -170,6 +169,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
@@ -181,3 +181,24 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 FRONTEND_URL = 'http://127.0.0.1:8000'
 
 LOGIN_URL = "sign-in"
+
+print("✅ EMAIL:", config('EMAIL_HOST_USER'))
+print("✅ PASSWORD EXISTS:", bool(config('EMAIL_HOST_PASSWORD')))
+
+
+# SECRET_KEY=django-insecure-*lp(o10kt!il)+l0#-#ix@-1i80orpbn0@ph&znj3jzc-48m))
+# DB_NAME=event_management
+# DB_USER=postgres
+# DB_PASSWORD=1234
+# DB_HOST=localhost
+# DB_PORT=5432
+
+# for email configuration
+# EMAIL_HOST=smtp.gmail.com
+# EMAIL_USE_TLS=True
+# EMAIL_PORT=587
+# EMAIL_HOST_USER=atiya.esha94@gmail.com  
+# EMAIL_HOST_PASSWORD=zkqr lexg tbew tnuh  
+
+#atiyaesha005@gmail.com
+#jrrr wicr hdra wsbe  

@@ -14,7 +14,7 @@ def notify_participants_on_event_creation(sender, instance, action, **kwargs):
         send_mail(
             "New event assigned",
             f"You have been assigned to the event: {instance.title}",
-            "atiyaesha005@gmail.com",
+            "atiya.esha94@gmail.com",
             assigned_emails,
             fail_silently=False
         )

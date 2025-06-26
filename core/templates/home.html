@@ -4,7 +4,7 @@
         {% comment %} Banner {% endcomment %}
         <div class="banner h-96 w-full text-center text-yellow-50 flex flex-col justify-center py-96 px-4 bg-cover bg-center">
           <h1 class="text-4xl py-6 md:text-6xl font-semibold text-yellow-50">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
-          <h5 class="text-yellow-50 text-lg md:text-xl lg:text-3xl py-4 lg:py-12">Technology || Corporate Event || Exhibition Stall || Music</h5>
+          <h5 class="text-yellow-50 text-lg md:text-xl lg:text-3xl py-4 lg:py-12">Technology || Corporate Event || Workshop || Exhibition Stall</h5>
           
           <div class="flex flex-col md:flex-row justify-center lg:py-8 gap-4">
             
@@ -65,9 +65,7 @@
             <a href="{% url 'events-by-category' %}?category=3"
             class="{% if request.GET.category == '3' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">
-                  EXHIBITION STALL
-                </h3>
+                <h3 class="text-lg font-medium text-yellow-600">WORKSHOP</h3>
                   <div class="bg-yellow-100 p-3 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
@@ -79,7 +77,7 @@
             <a href="{% url 'events-by-category' %}?category=4"
             class="{% if request.GET.category == '4' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
               <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">MUSIC</h3>
+                <h3 class="text-lg font-medium text-yellow-600">EXHIBITION STALL</h3>
                   <div class="bg-yellow-100 p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
