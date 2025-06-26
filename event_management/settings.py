@@ -108,12 +108,6 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'event_management',
-        # 'USER': 'postgres',
-        # 'PASSWORD': '1234',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-
         'NAME': config('DB_NAME', default=''),
         'USER': config('DB_USER', default=''),
         'PASSWORD': config('DB_PASSWORD', default=''),
@@ -185,20 +179,6 @@ LOGIN_URL = "sign-in"
 print("✅ EMAIL:", config('EMAIL_HOST_USER'))
 print("✅ PASSWORD EXISTS:", bool(config('EMAIL_HOST_PASSWORD')))
 
-
-# SECRET_KEY=django-insecure-*lp(o10kt!il)+l0#-#ix@-1i80orpbn0@ph&znj3jzc-48m))
-# DB_NAME=event_management
-# DB_USER=postgres
-# DB_PASSWORD=1234
-# DB_HOST=localhost
-# DB_PORT=5432
-
-# for email configuration
-# EMAIL_HOST=smtp.gmail.com
-# EMAIL_USE_TLS=True
-# EMAIL_PORT=587
-# EMAIL_HOST_USER=atiya.esha94@gmail.com  
-# EMAIL_HOST_PASSWORD=zkqr lexg tbew tnuh  
 
 #atiyaesha005@gmail.com
 #jrrr wicr hdra wsbe  
