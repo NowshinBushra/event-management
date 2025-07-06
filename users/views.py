@@ -68,8 +68,7 @@ def activate_user(request, user_id, token):
 @user_passes_test(is_admin, login_url='no-permission')
 def admin_dashboard(request):
     users = User.objects.prefetch_related(
-        Prefetch('groups', queryset=Group.objects.all(), to_attr='all_groups')
-    ).all()
+        Prefetch('groups', queryset=Group.objects.all(), to_attr='all_groups')).all()
 
     for user in users:
         if user.all_groups:
@@ -77,6 +76,7 @@ def admin_dashboard(request):
         else:
             user.group_name = 'No Group Assigned'
     return render(request, 'admin/dashboard.html', {"users": users})
+
 
 @user_passes_test(is_admin, login_url='no-permission')
 def assign_role(request, user_id):

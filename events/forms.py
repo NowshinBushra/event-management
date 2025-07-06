@@ -59,7 +59,7 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
     class Meta:
         model = Event
         # fields = '__aLL__'
-        fields = ['title', 'description', 'date', 'time', 'location', 'category', 'participants']
+        fields = ['title', 'description', 'date', 'time', 'location', 'category', 'participants', 'asset']
         
         widgets = {
             'date' : forms.SelectDateWidget, 

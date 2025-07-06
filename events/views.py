@@ -79,7 +79,7 @@ def create_event(request):
     # participant_form = UserModelForm()
 
     if request.method == "POST":
-        event_form = EventModelForm(request.POST)
+        event_form = EventModelForm(request.POST, request.FILES)
         category_form = CategoryModelForm(request.POST)
         # participant_form = UserModelForm(request.POST) 
         
@@ -196,8 +196,27 @@ def organizer_dashboard(request):
 
 @user_passes_test(is_participant)
 def user_dashboard(request):
+    my_rsvp_events = request.user.rsvp_events.all()
+    context = {
+        "my_rsvp_events": my_rsvp_events
+        }
+    return render(request, "user-dashboard.html", context)
 
-    return render(request, "user-dashboard.html")
+
+@login_required
+def rsvp_event(request, id):
+    event = Event.objects.get(id=id)
+
+    if request.user.groups.filter(name="User").exists():
+        if request.user in event.participants.all():
+            messages.info(request, "You already RSVP’d to this event.")
+        else:
+            event.participants.add(request.user)
+            messages.success(request, "RSVP successful! Check your email for confirmation.")
+    else:
+        messages.warning(request, "Only participants can RSVP.")
+
+    return redirect('event-detail', id=id)
 
 
 @login_required

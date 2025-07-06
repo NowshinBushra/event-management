@@ -10,7 +10,15 @@
           <a href="/" class="text-yellow-700 hover:font-medium">Home</a>
           <a href="{% url 'dashboard' %}" class="text-yellow-700 hover:font-medium">Dashboard</a>
           <a href="{% url 'show-events' %}" class="text-yellow-700 hover:font-medium">Events</a>
+
+          {% if request.user.groups.all.0.name == 'Organizer' %}
           <a href="{% url 'create-event' %}" class="text-yellow-700 hover:font-medium">Create-Event</a>
+          {% endif %}
+
+          {% if request.user.groups.all.0.name == 'Admin' %}
+          <a href="{% url 'group-list' %}" class="text-gray-600 hover:text-gray-800">Groups</a>
+          <a href="{% url 'create-group' %}" class="text-gray-600 hover:text-gray-800">Create Group</a>
+          {% endif %}
         </div>        
           
           <div class="flex gap-1">

@@ -1,15 +1,6 @@
-{% comment %} {% load static %} erpr npm run watch:tailwind {% endcomment %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"/> {% endcomment %}
-</head>
-<body>
+{% comment %}
     <header class="bg-white shadow-md">
       <nav class="container mx-auto px-6 py-3">
         <div class="flex justify-between items-center">
@@ -101,7 +92,7 @@
           >
         </div>
       </nav>
-    </header>
+    </header> {% endcomment %}
 
     <main>
       {% block content %}
@@ -129,5 +120,3 @@
         }
       });
     </script>
-  </body>
-</html>
