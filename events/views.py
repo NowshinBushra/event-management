@@ -190,15 +190,48 @@ def organizer_dashboard(request):
         "todays_event": todays_event,
         "all_participants": all_participants,
         "all_participants_count": all_participants_count,
+        'dashboard_url': 'organizer-dashboard',
         }
     return render(request, "organizer-dashboard.html", context)
 
 
 @user_passes_test(is_participant)
 def user_dashboard(request):
+    type = request.GET.get('type','all')
+    
+    today = now().date()
     my_rsvp_events = request.user.rsvp_events.all()
+    todays_event = Event.objects.filter(date=today)
+    
+    base_query = Event.objects.select_related('category').prefetch_related('participants')
+    if type == 'all':
+        events = base_query.all()
+    elif type == 'total events':
+        events = base_query.all()
+    elif type == 'upcoming events':
+        events = base_query.filter(date__gte=today)
+    elif type == 'past events':
+        events = base_query.filter(date__lt=today)
+    elif type == 'past rsvp events': 
+        events = my_rsvp_events.filter(date__lt=today)  
+
+    counts = Event.objects.aggregate(
+        total_events = Count('id'),
+        upcoming_events_count = Count('id', filter= Q(date__gte=today)),
+        past_events_count = Count('id', filter= Q(date__lt=today))
+    )
+    rsvp_counts = request.user.rsvp_events.aggregate(
+        past_rsvp_events_count=Count('id', filter=Q(date__lt=today)),
+    )
     context = {
-        "my_rsvp_events": my_rsvp_events
+        'events': events,
+        'counts': counts,
+        'type' : type.upper,
+        "todays_event": todays_event,
+
+        "rsvp_counts": rsvp_counts,
+        "my_rsvp_events": my_rsvp_events,
+        'dashboard_url': 'user-dashboard',
         }
     return render(request, "user-dashboard.html", context)
 
@@ -221,6 +254,9 @@ def rsvp_event(request, id):
 
 @login_required
 def dashboard(request):
+    print("User:", request.user)
+    print("Groups:", request.user.groups.all())
+    
     if is_organizer(request.user):
         return redirect('organizer-dashboard')
     

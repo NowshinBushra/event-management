@@ -1,9 +1,10 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
+{% block title %}Participant Dashboard{% endblock title %}
 
-  {% block content %}
-      <p>this is user dashboard</p>
+  {% block specific %}
 
-      <h2 class="text-2xl font-bold mb-4">My RSVP’d Events</h2>
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+      <h2 class="text-2xl text-center font-bold mb-4">My RSVP’d Events</h2>
       <ul class="space-y-2">
       {% for event in my_rsvp_events %}
         <li class="bg-gray-100 p-4 rounded shadow">
@@ -14,5 +15,43 @@
         <p>No RSVP’d events yet.</p>
       {% endfor %}
       </ul>
+    </div>
+{% endblock specific %}
 
-  {% endblock content %}
+{% block dashboard %}
+      <div class="bg-white p-6 rounded-lg shadow col-span-2">
+            <h2 class="text-xl font-bold mb-4">{{type}}</h2>
+            <table class="w-full">
+              <thead>
+                <tr class="text-left text-gray-500">
+                  <th class="pb-2">EVENT TITLE</th>
+                  <th class="pb-2">DATE</th>
+                  <th class="pb-2">LOCATION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for event in events %}
+              <tr>
+                <td class="py-2">
+                  <div class="flex items-center">
+                    <span
+                      class="w-2 h-2 bg-green-500 rounded-full mr-2"
+                    ></span>
+                    
+                    {% comment %} <a href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a> {% endcomment %}
+                    <p><span>{{event}}</span></p>
+                  </div>
+                </td>
+                <td class="py-2 text-sm text-gray-500">{{event.date}}</td>
+                <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
+                <td class="py-2">
+                  <a href='{% url "event-detail" event.id %}' class="bg-yellow-50 text-red-800 px-2 py-1 rounded text-sm">Details</a>
+                </td>
+              </tr>
+                {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+
+  {% endblock dashboard %}
