@@ -2,14 +2,16 @@
 {% block content %}
        
         {% comment %} Banner {% endcomment %}
-        <div class="banner h-96 w-full text-center text-yellow-50 flex flex-col justify-center py-96 px-4 bg-cover bg-center">
-          <h1 class="text-4xl py-6 md:text-6xl font-semibold text-yellow-50">WE'RE ON A MISSION TO BRING PEOPLE TOGETHER</h1>
-          <h5 class="text-yellow-50 text-lg md:text-xl lg:text-3xl py-4 lg:py-12">Technology || Corporate Event || Workshop || Exhibition Stall</h5>
+        <div class="banner h-96 w-full flex flex-col justify-center py-96 px-4 bg-cover bg-center">
+
+          <h1 class="text-4xl md:text-6xl font-semibold text-white">WE'RE ON A MISSION</h1>
+          <h1 class="text-4xl py-3 md:text-6xl font-semibold text-amber-500">TO BRING PEOPLE TOGETHER</h1>
+          <h5 class="text-white text-lg md:text-xl lg:text-2xl py-4 lg:py-12">Technology || Corporate Event || Workshop || Exhibition Stall</h5>
           
-          <div class="flex flex-col md:flex-row justify-center lg:py-8 gap-4">
+          <div class="flex flex-col md:flex-row lg:py-8 gap-4">
             
               
-                <a href="{% url 'show-events' %}" class="flex items-center rounded border border-white bg-yellow-700 py-1 px-6 text-center text-sm text-white shadow-lg" type="button">
+                <a href="{% url 'show-events' %}" class="flex items-center hover:font-extrabold rounded-lg border border-white font-bold text-amber-500 py-1 px-6 text-center text-sm shadow-lg" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
@@ -17,30 +19,30 @@
                   Search events...
                 </a> 
               
-                <a href="{% url 'create-event' %}" class="bg-yellow-700 hover:font-medium shadow-xl rounded border py-2 px-8 border-white text-center text-sm text-white">PLAN YOUR EVENT</a>
+                <a href="#category" class="text-amber-500 hover:font-medium shadow-xl rounded-lg border py-2 px-8 border-white text-center text-sm ">PLAN YOUR EVENT >></a>
             
           </div>
         </div>
   
 
         {% comment %} Event by category {% endcomment %}
-        <div class='bg-stone-100 px-3 pb-8'>
-          <h1 class="text-2xl md:text-3xl font-semibold py-6 text-center text-yellow-700">Event by Category</h1>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div id='category' class='bg-slate-50 px-3 py-12'>
+          <h1 class="text-2xl md:text-3xl font-semibold lg:font-bold py-6 text-center text-amber-600">Event by Category</h1>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {% comment %} TECHNOLOGY {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=1"
-              class="{% if request.GET.category == '1' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
-              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">TECHNOLOGY</h3>
-                  <div class="bg-yellow-100 p-3 rounded-full">
+              class="{% if request.GET.category == '1' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-lg flex justify-between items-center">
+                <h3 class="text-lg font-medium text-slate-800">TECHNOLOGY</h3>
+                  <div class="shadow-lg p-3 rounded-full">
                     <svg
                      xmlns="http://www.w3.org/2000/svg" 
                      fill="none" 
                      viewBox="0 0 24 24" 
                      stroke-width="1.5" 
                      stroke="currentColor" 
-                     class="size-6">
+                     class="size-6 text-orange-600">
                       <path
                        stroke-linecap="round" 
                        stroke-linejoin="round" 
@@ -51,41 +53,17 @@
             </a>
             {% comment %} CORPORATE EVENTS {% endcomment %}
             <a href="{% url 'events-by-category' %}?category=2"
-              class="{% if request.GET.category == '2' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
-              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">CORPORATE EVENTS</h3>
-                  <div class="bg-yellow-100 p-3 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-                    </svg>
-                  </div>
-              </div>
-            </a>
-            {% comment %} EXHIBITION STALL {% endcomment %}
-            <a href="{% url 'events-by-category' %}?category=3"
-            class="{% if request.GET.category == '3' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
-              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">WORKSHOP</h3>
-                  <div class="bg-yellow-100 p-3 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
-                    </svg>
-                  </div>
-              </div>
-            </a>
-            {% comment %} MUSIC {% endcomment %}
-            <a href="{% url 'events-by-category' %}?category=4"
-            class="{% if request.GET.category == '4' %}border-b-4 border-blue-900{% else %}border-transparent{% endif %}">
-              <div class="bg-white rounded-xl p-6 shadow-sm flex justify-between items-center">
-                <h3 class="text-lg font-medium text-yellow-600">EXHIBITION STALL</h3>
-                  <div class="bg-yellow-100 p-3 rounded-full">
+              class="{% if request.GET.category == '2' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-lg flex justify-between items-center">
+                <h3 class="text-lg font-medium text-slate-800">CORPORATE EVENTS</h3>
+                  <div class="shadow-lg p-3 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="2"
                       stroke="currentColor"
-                      class="w-6 h-6"
+                      class="w-6 h-6 text-orange-600"
                     >
                       <path
                         stroke-linecap="round"
@@ -96,35 +74,60 @@
                   </div>
               </div>
             </a>
+            {% comment %} EXHIBITION STALL {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=3"
+            class="{% if request.GET.category == '3' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-lg flex justify-between items-center">
+                <h3 class="text-lg font-medium text-slate-800">WORKSHOP</h3>
+                  <div class="shadow-lg p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-orange-600">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                    </svg>
+                    
+                  </div>
+              </div>
+            </a>
+            {% comment %} MUSIC {% endcomment %}
+            <a href="{% url 'events-by-category' %}?category=4"
+            class="{% if request.GET.category == '4' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
+              <div class="bg-white rounded-xl p-6 shadow-lg flex justify-between items-center">
+                <h3 class="text-lg font-medium text-slate-800">EXHIBITION STALL</h3>
+                  <div class="shadow-lg p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-orange-600">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
+                    </svg>
+                  </div>
+              </div>
+            </a>
             
           </div>
             {% comment %} search by date {% endcomment %}
             <form method="GET" class="flex justify-end mt-6 mx-10">
                 <div class="flex flex-col md:flex-row gap-4 bg-white px-4 py-2 rounded-lg shadow-md">
                   <div class="flex items-center">
-                    <label class="text-gray-700 font-medium" for="start_date">Start_Date: </label>
+                    <label class="text-gray-700 font-medium" for="start_date">Start Date: </label>
                     <input class="text-gray-400 border rounded-lg p-2" type="date" name="start_date">
                   </div>
     
                   <div class="flex items-center">
-                    <label class=" text-gray-700 font-medium" for="end_date">End_Date: </label>
+                    <label class=" text-gray-700 font-medium" for="end_date">End Date: </label>
                     <input class="text-gray-400 border rounded-lg p-2" type="date" name="end_date">
                   </div>
     
-                  <button class="bg-blue-500 text-white px-6 py-2 rounded-sm shadow hover:bg-blue-600" type="submit">Filter</button>
+                  <button class="bg-sky-800 text-white px-6 py-2 rounded-sm shadow hover:bg-blue-600" type="submit">Filter</button>
                 </div>
             </form> 
             
           {% comment %} Dynamic Events {% endcomment %}
           {% for event in events %}
-          <div class="flex flex-col md:flex-row justify-between items-center shadow-lg bg-amber-100 p-8 my-4 mx-4 md:mx-32 lg:mx-96">
+          <div class="flex flex-col md:flex-row justify-between items-center rounded-lg shadow-lg border-2 border-slate-800 shadow-slate-300 hover:shadow-yellow-300 p-8 my-16 mx-4 md:mx-32 lg:mx-96">
             <div>
-              <h2 class="text-lg "><span class="text-amber-800 font-medium">Event Title:</span> {{event.title}}</h2>
-              <p><span class="text-amber-800 font-medium">Description:</span> {{event.description}}</p>
-              <p><span class="text-amber-800 font-medium">Participants:</span> {{event.participant_count}}</p>
+              <h2 class="text-xl text-slate-800"><span class="text-xl font-bold">Event Title:</span> {{event.title}}</h2>
+              <p class="text-lg text-slate-800 my-2"><span class="font-semibold">Description:</span> {{event.description}}</p>
+              <p><span class="font-semibold">Participants:</span> {{event.participant_count}}</p>
             </div>
-            <div class="mt-4 md:mt-0">
-            <a class="bg-yellow-600 text-white px-4 py-2 rounded shadow-sm hover:bg-yellow-700" href="{% url 'event-detail' event.id%}">Ticket and details</a>
+            <div class="mt-4 ms-4 md:mt-0">
+            <a class="px-4 py-2 rounded-lg border-2 border-amber-600 hover:border-blue-950 shadow text-amber-600 hover:text-white  font-bold hover:bg-amber-500" href="{% url 'event-detail' event.id%}">DETAILS</a>
             </div>
           </div>
           {% endfor %}

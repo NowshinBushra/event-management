@@ -2,41 +2,41 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="bg-slate-400 text-white font-semibold mx-4 my-10 md:m-20 lg:mx-60 p-6 md:p-10 shadow-md rounded-lg">
-  <div class="flex flex-col lg:flex-row gap-10 items-start">
+  <div class="flex flex-col md:flex-col lg:flex-row gap-10 items-start">
     
     <div class="flex-1">
-      <h2 class="text-2xl font-bold">
-        <span class="text-yellow-200">Event Title:</span> {{ event.title }}
+      <h2 class="mt-4 text-xl md:text-2xl lg:text-3xl font-bold">
+        <span class="text-black">Event Title:</span> {{ event.title }}
       </h2>
-      <p class="text-lg"><span class="text-yellow-200">Description:</span> {{ event.description }}</p>
-      <p class="text-lg"><span class="text-yellow-200">Category:</span> {{ event.category.name }}</p>
+      <p class="my-2 text-base md:text-lg"><span class="text-black">Description:</span> {{ event.description }}</p>
+      <p class="my-2 text-lg"><span class="text-black">Category:</span> {{ event.category.name }}</p>
       
-      <p class="text-lg"><span class="text-yellow-200">Participants:</span></p>
+      <p class="my-2 text-lg"><span class="text-black">Participants:</span></p>
       <ul class="list-disc list-inside text-white">
         {% for p in event.participants.all %}
           <li>{{ p.first_name }}</li>
         {% endfor %}
       </ul>
 
-      <div class="text-teal-800 mt-5 flex flex-wrap gap-3">
-        <span class="bg-yellow-50 px-4 py-2 rounded">Date: {{ event.date }}</span>
-        <span class="bg-yellow-50 px-4 py-2 rounded">Time: {{ event.time }}</span>
-        <span class="bg-yellow-50 px-4 py-2 rounded">Location: {{ event.location }}</span>
+      <div class="text-teal-800 mt-5 flex flex-wrap gap-2 md:gap-3">
+        <span class="bg-white px-2 md:px-4 py-2 rounded">Date: {{ event.date }}</span>
+        <span class="bg-white px-2 md:px-4 py-2 rounded">Time: {{ event.time }}</span>
+        <span class="bg-white px-2 md:px-4 py-2 rounded">Location: {{ event.location }}</span>
       </div>
       <br>
       {% if request.user.groups.all.0.name == 'Organizer' or request.user.groups.all.0.name == 'Admin' %}
         <div class="text-teal-800 mt-5 flex flex-wrap gap-3">
-            <a href='{% url "update-event" event.id %}' class="bg-yellow-50 text-red-800 border border-red-700 px-2 py-1 rounded">Update</a>
+            <a href='{% url "update-event" event.id %}' class="bg-blue-600 text-white border px-2 py-1 rounded">Update</a>
             <form action='{% url "delete-event" event.id %}' method="POST">
             {% csrf_token %}
-            <button type='submit' class="bg-yellow-50 text-red-800 border border-red-700 px-2 py-1 rounded">Delete</button>
+            <button type='submit' class="bg-red-700 border text-white px-2 py-1 rounded">Delete</button>
             </form>
-      </div>
+        </div>
       {% endif %}
 
       {% if user.is_authenticated and request.user.groups.all.0.name == "User" %}
         {% if user in event.participants.all %}
-            <p class="text-green-500 mt-4">You have RSVP’d to this event.</p>
+            <p><span class="bg-green-500 mt-4 py-1 px-4">You have RSVP’d to this event.</span></p>
         {% else %}
             <form action="{% url 'rsvp-event' event.id %}" method="POST" class="mt-4">
             {% csrf_token %}
@@ -48,7 +48,7 @@
     </div>
 
     
-    <div class="w-full lg:w-1/2 bg-white p-2 rounded-lg shadow-lg">
+    <div class="w-full lg:w-1/2 p-2 rounded-lg shadow-lg">
       <img src="{{ event.asset.url }}" alt="Event Asset" class="w-full h-auto rounded-lg" />
     </div>
 

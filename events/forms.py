@@ -10,7 +10,7 @@ class StyledFormMixin:
         super().__init__(*arg, **kwarg)
         self.apply_styled_widgets()
 
-    default_classes = "border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
+    default_classes = "border-2 border-gray-300 w-full p-3 my-2 rounded-lg shadow-sm focus:outline-none focus:border-slate-800 focus:ring-slate-800"
 
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
@@ -27,11 +27,11 @@ class StyledFormMixin:
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):
                 field.widget.attrs.update({
-                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
+                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-slate-800 focus:ring-yellow-600"
                 })
             elif isinstance(field.widget, forms.TimeInput):
                 field.widget.attrs.update({
-                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-yellow-600 focus:ring-yellow-600"
+                    "class": "border-2 border-gray-300 p-3 rounded-lg shadow-sm focus:outline-none focus:border-slate-800 focus:ring-yellow-600"
                 })
             elif isinstance(field.widget, forms.Select):
                 field.widget.attrs.update({

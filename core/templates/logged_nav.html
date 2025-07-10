@@ -1,23 +1,21 @@
 
-
-
-<header class="bg-white shadow-md">
+<header class="bg-slate-800 text-white shadow-md static border-b border-amber-500">
     <nav class="container mx-auto px-6 py-3">
       <div class="flex justify-between items-center">
-        <div class="text-2xl italic font-bold text-yellow-800">Evento</div>
+        <div class="text-2xl italic font-bold">Evento</div>
         
         <div class="hidden md:flex space-x-4 justify-center items-center">
-          <a href="/" class="text-yellow-700 hover:font-medium">Home</a>
-          <a href="{% url 'dashboard' %}" class="text-yellow-700 hover:font-medium">Dashboard</a>
-          <a href="{% url 'show-events' %}" class="text-yellow-700 hover:font-medium">Events</a>
+          <a href="/" class="hover:text-sky-200 hover:font-medium">Home</a>
+          <a href="{% url 'dashboard' %}" class="hover:text-sky-200 hover:font-medium">Dashboard</a>
+          <a href="{% url 'show-events' %}" class="hover:text-sky-200 hover:font-medium">Events</a>
 
           {% if request.user.groups.all.0.name == 'Organizer' %}
-          <a href="{% url 'create-event' %}" class="text-yellow-700 hover:font-medium">Create-Event</a>
+          <a href="{% url 'create-event' %}" class="hover:text-sky-200 hover:font-medium">Create-Event</a>
           {% endif %}
 
           {% if request.user.groups.all.0.name == 'Admin' %}
-          <a href="{% url 'group-list' %}" class="text-gray-600 hover:text-gray-800">Groups</a>
-          <a href="{% url 'create-group' %}" class="text-gray-600 hover:text-gray-800">Create Group</a>
+          <a href="{% url 'group-list' %}" class="hover:text-sky-200 hover:font-medium">Groups</a>
+          <a href="{% url 'create-group' %}" class=" hover:text-sky-200 hover:font-medium">Create Group</a>
           {% endif %}
         </div>        
           
@@ -26,15 +24,15 @@
                   <form action="{% url 'sign-out' %}" method="POST">
                     {% csrf_token %}
                     <button type="submit"
-                    class="hidden md:block bg-yellow-600 text-white px-4 py-1.5 rounded-md hover:bg-yellow-700 transition duration-300"
+                    class="hidden md:block px-4 py-2 rounded-lg border-2 border-amber-500 shadow text-amber-500  font-bold hover:font-extrabold"
                     >Logout</button>
                   </form>
           </div>
                   
 
         {% comment %} mmobile toggle button {% endcomment %}
-        <button id="menu-toggle" class="md:hidden focus:outline-none">
-          <svg class="w-6 h-6 text-yellow-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <button id="menu-toggle" class="rounded md:hidden focus:outline-none">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
@@ -42,29 +40,28 @@
         
         
       <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-        <a href="/" class="block py-2 text-gray-600 hover:text-gray-800">Home</a>
-        <a href="{% url 'organizer-dashboard' %}" class="block py-2 text-gray-600 hover:text-gray-800">Dashboard</a>
-        <a href="{% url 'show-events' %}" class="block py-2 text-gray-600 hover:text-gray-800">Events</a>
-        <a href="{% url 'create-event' %}" class="block py-2 text-gray-600 hover:text-gray-800">Create-Event</a>
-        <a href="" class="text-yellow-700 hover:font-medium">
-            <div>
-              {% if user.is_authenticated %}
+        <a href="/" class="block py-2 hover:text-sky-200 hover:font-medium">Home</a>
+        <a href="{% url 'organizer-dashboard' %}" class="block py-2 hover:text-sky-200 hover:font-medium">Dashboard</a>
+        <a href="{% url 'show-events' %}" class="block py-2 hover:text-sky-200 hover:font-medium">Events</a>
+
+        {% if request.user.groups.all.0.name == 'Organizer' %}
+        <a href="{% url 'create-event' %}" class="block py-2 hover:text-sky-200 hover:font-medium">Create-Event</a>
+        {% endif %}
+
+        {% if request.user.groups.all.0.name == 'Admin' %}
+        <a href="{% url 'group-list' %}" class="block py-2 hover:text-sky-200 hover:font-medium">Groups</a>
+        <a href="{% url 'create-group' %}" class=" block py-2 hover:text-sky-200 hover:font-medium">Create Group</a>
+        {% endif %}
+
+            <div class="block py-2 hover:text-sky-200 hover:font-medium">
                   <form action="{% url 'sign-out' %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button type="submit"
+                    class="bg-white text-slate-800 px-4 py-1.5 rounded shadow hover:bg-gray-100"
+                    >Logout</button>
                   </form>
-                  {% else %}
-                  <div class="flex gap-1">
-                    <a href="{% url 'sign-in' %}"
-                        class="block bg-yellow-600 text-white px-2 py-1.5 rounded-md hover:bg-yellow-700 transition duration-300"
-                        >Sign In</a>
-                    <a href="{% url 'sign-up' %}"
-                        class="block bg-yellow-600 text-white px-2 py-1.5 rounded-md hover:bg-yellow-700 transition duration-300"
-                        >Sign Up</a>
-                  </div>
-              {% endif %}
-          </div>
-          </a>
+            </div>
+
       </div>
     </nav>
   </header>
