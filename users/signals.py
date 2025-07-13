@@ -13,8 +13,7 @@ def send_activation_email(sender, instance, created, **kwargs):
         activation_url = f'{settings.FRONTEND_URL}/users/activate/{instance.id}/{token}/'
 
         subject = 'Activate Your Account'
-        message = f'Hi {instance.username},\n\nPlease activate your account by clicking the link below:\n{
-            activation_url}'
+        message = f'Hi {instance.username},\n\nPlease activate your account by clicking the link below:\n{activation_url}'
         recipient_list = [instance.email]
 
         try:
