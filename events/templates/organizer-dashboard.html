@@ -4,17 +4,17 @@
 
       {% block specific %}
       {% comment %} Today's Events {% endcomment %}
-          <div class="bg-white p-6 rounded-lg shadow mb-8">
-            <h2 class="text-2xl font-bold mb-4">Today's Events</h2>
+          <div class="bg-slate-100 p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl text-center text-amber-600 font-bold mb-4">Today's Events</h2>
             
             {% if todays_event %}
             <table class="w-full">
               <thead>
                 <tr class="text-left text-gray-500">
                   <th class="pb-2">TITLE</th>
-                  <th class="pb-2">CATEGORY</th>
                   <th class="pb-2">TIME</th>
                   <th class="pb-2">LOCATION</th>
+                  <th class="hidden md:inline-block pb-2">CATEGORY</th>
                 </tr>
               </thead>
               <tbody>
@@ -28,9 +28,9 @@
                     <a href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a>
                   </div>
                 </td>
-                <td class="py-2 text-sm text-gray-500">{{event.category.name}}</td>
                 <td class="py-2 text-sm text-gray-500">{{event.time}}</td>
                 <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
+                <td class="hidden md:inline-block py-2 text-sm text-gray-500">{{event.category.name}}</td>
               </tr>
               {% endfor %}
               </tbody>
@@ -45,43 +45,67 @@
   {% block dashboard %}
 
           {% comment %} DYNAMIC EVENTS {% endcomment %}
-          <div class="bg-white p-6 rounded-lg shadow col-span-2">
+          <div class="bg-white border-2 border-sky-900 p-6 rounded-lg shadow">
             <h2 class="text-xl font-bold mb-4">{{type}}</h2>
             <table class="w-full">
               <thead>
+                {% if request.GET.type == 'all participants' %}
                 <tr class="text-left text-gray-500">
-                  <th class="pb-2">EVENT TITLE</th>
-                  <th class="pb-2">DATE</th>
-                  <th class="pb-2">LOCATION</th>
+                  <th class="pb-2">NAME</th>
+                  <th class="pb-2">Next RSVP'd Event</th>
                 </tr>
+                {% else %}
+                <tr class="text-left text-gray-500">
+                  <th class="pb-2">EVENT</th>
+                  <th class="pb-2">DATE</th>
+                  <th class="pb-2">PLACE</th>
+                  <th class="hidden md:inline-block pb-2">ACTION</th>
+                </tr>
+                {% endif %}
               </thead>
               <tbody>
+              {% if request.GET.type == 'all participants' %}
+                {% for p, event in participant_events %}
+              <tr>
+                <td class="py-2">
+                  <div class="flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    <p class="text-stone-700 font-medium">{{p.first_name}} {{p.last_name}}</p>
+                  </div>
+                </td>
+                <td class="py-2">
+                    {% if event %}
+                    <p class="text-sky-800">{{ event.title }}</p>
+                    {% else %}
+                    <p class="text-gray-500 italic">No next event</p>
+                  {% endif %}
+                </td>
+              </tr>
+                {% endfor %}
+
+              {% else %}
                 {% for event in events %}
               <tr>
                 <td class="py-2">
                   <div class="flex items-center">
-                    <span
-                      class="w-2 h-2 bg-green-500 rounded-full mr-2"
-                    ></span>
-                    
-                    <a href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a>
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    <a class="text-stone-700 font-medium py-2" href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a>
                   </div>
                 </td>
-                <td class="py-2 text-sm text-gray-500">{{event.date}}</td>
+                <td class="py-2 text-sm text-blue-800">{{event.date}}</td>
                 <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
-                <td class="py-2">
-                  <a href='{% url "update-event" event.id %}' class="bg-yellow-50 text-red-800 px-2 py-1 rounded text-sm">Update</a>
+                <td class="hidden md:inline-block py-2 mr-1">
+                  <a href='{% url "update-event" event.id %}' class=" border border-blue-900 shadow text-blue-900 px-2 py-1 rounded text-sm">Update</a>
                 </td>
-                <td class="py-2">
+                <td class="hidden md:inline-block py-2">
                   <form action='{% url "delete-event" event.id %}' method="POST">
                     {% csrf_token %}
-                    <button type='submit' class="bg-yellow-50 text-red-800 px-2 py-1 rounded text-sm">Delete</button>
+                    <button type='submit' class="border border-amber-700 shadow text-amber-700 px-2 py-1 rounded text-sm">Delete</button>
                   </form>
                 </td>
-                
               </tr>
                 {% endfor %}
-                
+               {% endif %} 
               </tbody>
             </table>
           </div>

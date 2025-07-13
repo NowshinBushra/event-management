@@ -54,7 +54,7 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
         # queryset=Participant.objects.all(),
         queryset=User.objects.filter(groups__name='User'), #======================pchange
         widget=forms.CheckboxSelectMultiple,
-        required=True
+        required=False
     )
     class Meta:
         model = Event

@@ -8,6 +8,8 @@ from users.forms import LoginForm, AssignRoleForm, CreateGroupForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Prefetch
+from events.models import Event
+from django.utils.timezone import now
 
 # Create your views here.
 
@@ -73,13 +75,25 @@ def activate_user(request, user_id, token):
 def admin_dashboard(request):
     users = User.objects.prefetch_related(
         Prefetch('groups', queryset=Group.objects.all(), to_attr='all_groups')).all()
+    events = Event.objects.select_related('category').prefetch_related('participants').all()
+    groups = Group.objects.prefetch_related('permissions').all()
+    today = now().date()
+    todays_event = Event.objects.filter(date=today)
 
     for user in users:
         if user.all_groups:
             user.group_name = user.all_groups[0].name
         else:
             user.group_name = 'No Group Assigned'
-    return render(request, 'admin/dashboard.html', {"users": users})
+
+
+    context = {
+        "users": users,
+        'events': events,
+        "todays_event": todays_event,
+        'groups': groups,
+    }
+    return render(request, 'admin/dashboard.html', context)
 
 
 @user_passes_test(is_admin, login_url='no-permission')
@@ -116,4 +130,28 @@ def create_group(request):
 def group_list(request):
     groups = Group.objects.prefetch_related('permissions').all()
     return render(request, 'admin/group_list.html', {'groups': groups})
+
+
+@user_passes_test(is_admin, login_url='no-permission')
+def delete_user(request, user_id):
+    if request.method =="POST":
+        user = User.objects.get(id=user_id)
+        user.delete()
+        messages.success(request, 'User deleted successfully')
+        return redirect('admin-dashboard')
+    else:
+        messages.success(request, 'Something went wrong')
+        return redirect('admin-dashboard')
+    
+
+@user_passes_test(is_admin, login_url='no-permission')
+def delete_group(request, grp_id):
+    if request.method =="POST":
+        group = Group.objects.get(id=grp_id)
+        group.delete()
+        messages.success(request, 'Group deleted successfully')
+        return redirect('group-list')
+    else:
+        messages.success(request, 'Something went wrong')
+        return redirect('group-list')
 

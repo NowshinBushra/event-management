@@ -7,11 +7,17 @@
                     <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-400 text-white font-medium{% endif %} ">{{message}}</div>
                 {% endfor %}
             {% endif %}
+
+            {% if event_form.non_field_errors %}                  
+                {% for error in event_form.non_field_errors %}
+                {{error}}
+                {% endfor %}                    
+            {% endif %}
         </div>
     
     
 
-        <form method="POST"  enctype="multipart/form-data">
+        <form method="POST"  enctype="multipart/form-data" novalidate>
             {% csrf_token %}
 
             <h2 class="font-bold text-xl text-yellow-700 py-2">Create New Event</h2>

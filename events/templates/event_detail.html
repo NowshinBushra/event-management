@@ -6,12 +6,12 @@
     
     <div class="flex-1">
       <h2 class="mt-4 text-xl md:text-2xl lg:text-3xl font-bold">
-        <span class="text-black">Event Title:</span> {{ event.title }}
+        <span class="text-amber-100">Event Title:</span> {{ event.title }}
       </h2>
-      <p class="my-2 text-base md:text-lg"><span class="text-black">Description:</span> {{ event.description }}</p>
-      <p class="my-2 text-lg"><span class="text-black">Category:</span> {{ event.category.name }}</p>
+      <p class="my-2 text-base md:text-lg"><span class="text-amber-100">Description:</span> {{ event.description }}</p>
+      <p class="my-2 text-lg"><span class="text-amber-100">Category:</span> {{ event.category.name }}</p>
       
-      <p class="my-2 text-lg"><span class="text-black">Participants:</span></p>
+      <p class="my-2 text-lg"><span class="text-amber-100">Participants:</span></p>
       <ul class="list-disc list-inside text-white">
         {% for p in event.participants.all %}
           <li>{{ p.first_name }}</li>

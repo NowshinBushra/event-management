@@ -8,6 +8,7 @@
       <main>
         {% block specific %}
         {% endblock specific %}
+        
           <div>
               {% if messages %}
                   {% for message in messages %}
@@ -17,27 +18,26 @@
           </div>
 
        {% comment %} Stats Grid  {% endcomment %}
-        <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-2 lg:mb-8">
           
 
           {% comment %} Total PARTICIPANTS  {% endcomment %}
           {% if request.user.groups.all.0.name == 'Organizer' %}
-          <div class="bg-white rounded-xl p-6 shadow-sm">
+        <a href="{% url dashboard_url %}?type=all participants">
+          <div class="bg-gray-100 rounded-xl p-3 lg:p-6 shadow-lg {% if request.GET.type == 'all participants' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
             <h3 class="text-sm font-medium text-gray-500 mb-4">TOTAL PARTICIPANTS</h3>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ all_participants_count }}</p>
-                <a class="text-gray-500 text-sm {% if request.GET.type == 'all_participants' %}text-red-600{% endif %}" 
-                  href="{% url dashboard_url %}?type=all_participants">Click here to see</a>
               </div>
-              <div class="bg-yellow-100 p-3 rounded-full">
+              <div class="shadow-lg p-3 rounded-full">
                 <svg
                  xmlns="http://www.w3.org/2000/svg" 
                  fill="none" 
                  viewBox="0 0 24 24" 
                  stroke-width="1.5" 
                  stroke="currentColor" 
-                 class="w-6 h-6 text-yellow-600"
+                 class="w-6 h-6 text-amber-600"
                  >
                     <path 
                         stroke-linecap="round" 
@@ -49,26 +49,26 @@
               </div>
             </div>
           </div>
+        </a>
           {% endif %}
 
           {% comment %} PAST RSVP EVENTS  {% endcomment %}
           {% if request.user.groups.all.0.name == 'User' %}
-          <div class="bg-white rounded-xl p-6 shadow-sm">
+          <a href="{% url dashboard_url %}?type=past rsvp events">
+          <div class="bg-gray-100 rounded-xl p-3 lg:p-6 shadow-lg {% if request.GET.type == 'past rsvp events' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
             <h3 class="text-sm font-medium text-gray-500 mb-4">PAST RSVP EVENTS</h3>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ rsvp_counts.past_rsvp_events_count }}</p>
-                <a class="text-gray-500 text-sm {% if request.GET.type == 'past rsvp events' %}text-red-600{% endif %}" 
-                  href="{% url dashboard_url %}?type=past rsvp events">Click here to see</a>
               </div>
-              <div class="bg-yellow-100 p-3 rounded-full">
+              <div class="shadow-lg p-3 rounded-full">
                 <svg
                  xmlns="http://www.w3.org/2000/svg" 
                  fill="none" 
                  viewBox="0 0 24 24" 
                  stroke-width="1.5" 
                  stroke="currentColor" 
-                 class="w-6 h-6 text-yellow-600"
+                 class="w-6 h-6 text-amber-600"
                  >
                     <path 
                         stroke-linecap="round" 
@@ -80,23 +80,21 @@
               </div>
             </div>
           </div>
+        </a>
           {% endif %}
           {% comment %} TOTAL EVENTS   {% endcomment %}
-          <div class="bg-white rounded-xl p-6 shadow-sm">
+          <a href="{% url dashboard_url %}?type=total events">
+          <div class="bg-gray-100 rounded-xl p-3 lg:p-6 shadow-lg {% if request.GET.type == 'total events' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
             <h3 class="text-sm font-medium text-gray-500 mb-4">TOTAL EVENTS</h3>
             <div class="flex justify-between items-start">
-              <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.total_events }}</p>
-                <a class="text-gray-500 text-sm {% if request.GET.type == 'total events' %}text-red-600{% endif %}" 
-                  href="{% url dashboard_url %}?type=total events">Click here to see</a>
-              </div>
-              <div class="bg-yellow-100 p-3 rounded-full">
+              <div class="shadow-lg p-3 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  class="w-6 h-6 text-yellow-600"
+                  class="w-6 h-6 text-amber-600"
                 >
                   <path
                     stroke-linecap="round"
@@ -108,25 +106,25 @@
               </div>
             </div>
           </div>
+        </a>
           {% comment %} UPCOMING EVENTS   {% endcomment %}
-          <div class="bg-white rounded-xl p-6 shadow-sm">
+        <a href="{% url dashboard_url %}?type=upcoming events">
+          <div class="bg-gray-100 rounded-xl p-3 lg:p-6 shadow-lg {% if request.GET.type == 'upcoming events' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
             <h3 class="text-sm font-medium text-gray-500 mb-4">
               UPCOMING EVENTS
             </h3>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.upcoming_events_count }}</p>
-                <a class="text-gray-500 text-sm {% if request.GET.type == 'upcoming events' %}text-red-600{% endif %}"
-                  href="{% url dashboard_url %}?type=upcoming events">Click here to see</a>
               </div>
-              <div class="bg-yellow-100 p-3 rounded-full">
+              <div class="shadow-lg p-3 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="2"
                   stroke="currentColor"
-                  class="w-6 h-6 text-yellow-600"
+                  class="w-6 h-6 text-amber-600"
                 >
                   <path
                     stroke-linecap="round"
@@ -137,23 +135,23 @@
               </div>
             </div>
           </div>
+        </a>
           {% comment %} PAST EVENTS   {% endcomment %}
-          <div class="bg-white rounded-xl p-6 shadow-sm">
+        <a href="{% url dashboard_url %}?type=past events">
+          <div class="bg-gray-100 rounded-xl p-3 lg:p-6 shadow-lg {% if request.GET.type == 'past events' %}border-b-2 border-blue-900{% else %}border-transparent{% endif %}">
             <h3 class="text-sm font-medium text-gray-500 mb-4">PAST EVENTS</h3>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-3xl font-semibold mb-1">{{ counts.past_events_count }}</p>
-                <a class="text-gray-500 text-sm {% if request.GET.type == 'past events' %}text-red-600{% endif %}" 
-                  href="{% url dashboard_url %}?type=past events">Click here to see</a>
               </div>
-              <div class="bg-yellow-100 p-3 rounded-full">
+              <div class="shadow-lg p-3 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="2"
                   stroke="currentColor"
-                  class="w-6 h-6 text-yellow-600"
+                  class="w-6 h-6 text-amber-600"
                 >
                   <path
                     stroke-linecap="round"
@@ -164,6 +162,7 @@
               </div>
             </div>
           </div>
+          </a>
         </div>
         
         {% block dashboard %}

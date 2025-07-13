@@ -1,32 +1,28 @@
 
 
-
-<header class="bg-cyan-700 text-white shadow-md">
+<header class="bg-slate-800 text-white shadow-md border-b border-amber-500">
     <nav class="container mx-auto px-6 py-3">
       <div class="flex justify-between items-center">
         <div class="text-2xl italic font-bold">Evento</div>
         
         <div class="hidden md:flex space-x-4 justify-center items-center">
-          <a href="/" class="hover:text-cyan-200 hover:font-medium">Home</a>
-          <a href="{% url 'show-events' %}" class="hover:text-cyan-200 hover:font-medium">Events</a>
-          <a href="" class="hover:text-cyan-200 hover:font-medium">About</a>
+          <a href="/" class="hover:text-amber-400 hover:font-medium">Home</a>
+          <a href="{% url 'show-events' %}" class="hover:text-amber-400 hover:font-medium">Events</a>
+          <a href="" class="hover:text-amber-400 hover:font-medium">About</a>
         </div>
-        
-          
-          
-                  <div class="flex gap-1">
-                    <a href="{% url 'sign-in' %}"
-                        class="hidden md:block font-medium bg-white text-cyan-600 px-4 py-1.5 rounded-md shadow hover:bg-gray-100"
-                        >Sign In</a>
-                    <a href="{% url 'sign-up' %}"
-                        class="hidden md:block font-medium bg-white text-cyan-600 px-4 py-1.5 rounded-md shadow hover:bg-gray-100"
-                        >Sign Up</a>
-                  </div>
-          
-          
-        
 
-        {% comment %} mmobile toggle button {% endcomment %}
+        <div class="flex gap-2">
+          <a href="{% url 'sign-in' %}"
+              class="hidden md:block border-2 border-amber-500 shadow text-amber-500 px-4 py-1.5 rounded-md hover:font-medium"
+              >Sign In</a>
+          <a href="{% url 'sign-up' %}"
+              class="hidden md:block border-2 border-amber-500 shadow text-amber-500 px-4 py-1.5 rounded-md hover:font-medium"
+              >Sign Up</a>
+        </div>
+          
+          
+
+        {% comment %} mobile toggle button {% endcomment %}
         <button id="menu-toggle" class="md:hidden focus:outline-none">
           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -36,20 +32,18 @@
         
         
       <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-        <a href="/" class="block py-2 hover:text-cyan-200 hover:font-medium">Home</a>
-        <a href="{% url 'show-events' %}" class="block py-2 hover:text-cyan-200 hover:font-medium">Events</a>
-        <a href="" class="block py-2 hover:text-cyan-200 hover:font-medium">About</a>
-        <a href="" class="text-yellow-700 hover:font-medium">
-
-                  <div class="flex gap-1block py-2 hover:text-cyan-200 hover:font-medium">
-                    <a href="{% url 'sign-in' %}"
-                        class="bg-white me-1 text-cyan-600 px-3 py-1 rounded shadow hover:bg-gray-100"
-                        >Sign In</a>
-                    <a href="{% url 'sign-up' %}"
-                        class="bg-white text-cyan-600 px-3 py-1 rounded shadow hover:bg-gray-100"
-                        >Sign Up</a>
-                  </div>
-          </a>
+        <a href="/" class="block py-2 hover:text-amber-400 hover:font-medium">Home</a>
+        <a href="{% url 'show-events' %}" class="block py-2 hover:text-amber-400 hover:font-medium">Events</a>
+        <a href="" class="block py-2 hover:text-amber-400 hover:font-medium">About</a>
+        
+            <div class="block py-2">
+              <a href="{% url 'sign-in' %}"
+                  class="me-1 text-amber-500 px-3 py-1.5 border-2 border-amber-500 rounded shadow hover:font-medium"
+                  >Sign In</a>
+              <a href="{% url 'sign-up' %}"
+                  class="text-amber-500 px-3 py-1.5 border-2 border-amber-500 rounded shadow hover:font-medium"
+                  >Sign Up</a>
+            </div>
       </div>
     </nav>
   </header>

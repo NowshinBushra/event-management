@@ -17,7 +17,7 @@ class Event(models.Model):
     time = models.TimeField()
     location = models.CharField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="events")
-    participants = models.ManyToManyField(User, related_name="rsvp_events", blank=True) #======================pchange
+    participants = models.ManyToManyField(User, related_name="rsvp_events", blank=True)
     asset = models.ImageField(upload_to='event_asset', blank=True, null=True, default="event_asset/default_img.png")
 
     def __str__(self):

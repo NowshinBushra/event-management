@@ -2,24 +2,39 @@
 {% block title %}Participant Dashboard{% endblock title %}
 
   {% block specific %}
-
-    <div class="bg-white p-6 rounded-lg shadow mb-8">
-      <h2 class="text-2xl text-center font-bold mb-4">My RSVP’d Events</h2>
+  <div class="flex flex-col md:flex-row justify-evenly">
+    <div class="bg-indigo-200 p-6 md:px-28 rounded-lg shadow-lg mb-8">
+      <h2 class="text-2xl text-center font-bold mb-4">My Next Events</h2>
       <ul class="space-y-2">
-      {% for event in my_rsvp_events %}
-        <li class="bg-gray-100 p-4 rounded shadow">
-          <a href="{% url 'event-detail' event.id %}" class="text-blue-700 hover:underline">{{ event.title }}</a>
-          <p class="text-sm text-gray-600">{{ event.date }} | {{ event.time }}</p>
+      {% for event in next_rsvp_events %}
+        <li class="bg-slate-50 py-4 px-12 rounded shadow">
+          <a href="{% url 'event-detail' event.id %}" class="md:inline md:mr-6 text-sky-800 text-lg md:text-xl font-medium">{{ event.title }}</a>
+          <p class="md:inline text-sm text-gray-600">{{ event.date }}  |  {{ event.time }}</p>
+          <p class=" text-gray-600">Location: {{ event.location }}</p>
         </li>
       {% empty %}
-        <p>No RSVP’d events yet.</p>
+        <p class="text-gray-500 text-center text-lg py-4 italic">No next RSVP’d events.</p>
       {% endfor %}
       </ul>
     </div>
+    <div class="bg-violet-200 p-6 md:px-28 rounded-lg shadow-lg mb-8">
+      <h2 class="text-2xl text-center font-bold mb-4">Today's Events</h2>
+      <ul class="space-y-2">
+      {% for event in todays_event %}
+        <li class="bg-slate-50 py-4 px-12 rounded shadow">
+          <a href="{% url 'event-detail' event.id %}" class="md:mr-6 text-sky-800 text-lg md:text-xl font-medium">{{ event.title }}</a>
+          <p class="text-sm text-gray-600">Time: {{ event.time }} || Location: {{ event.location }}</p>
+        </li>
+      {% empty %}
+        <p class="text-gray-500 text-center text-lg py-4 italic">No events for today.</p>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock specific %}
 
 {% block dashboard %}
-      <div class="bg-white p-6 rounded-lg shadow col-span-2">
+      <div class="bg-white border-2 border-sky-900 p-6 mt-6 rounded-lg shadow">
             <h2 class="text-xl font-bold mb-4">{{type}}</h2>
             <table class="w-full">
               <thead>
@@ -27,6 +42,7 @@
                   <th class="pb-2">EVENT TITLE</th>
                   <th class="pb-2">DATE</th>
                   <th class="pb-2">LOCATION</th>
+                  <th class="hidden md:inline-block pb-2">ACTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -38,14 +54,14 @@
                       class="w-2 h-2 bg-green-500 rounded-full mr-2"
                     ></span>
                     
-                    {% comment %} <a href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a> {% endcomment %}
-                    <p><span>{{event}}</span></p>
+                    <a class="block md:hidden text-stone-700 font-medium py-2" href="{% url 'event-detail' event.id %}"><span>{{event}}</span></a>
+                    <p class="hidden md:inline-block text-stone-700 font-medium py-2"><span>{{event}}</span></p>
                   </div>
                 </td>
-                <td class="py-2 text-sm text-gray-500">{{event.date}}</td>
+                <td class="py-2 text-sm text-blue-800">{{event.date}}</td>
                 <td class="py-2 text-sm text-gray-500">{{event.location}}</td>
-                <td class="py-2">
-                  <a href='{% url "event-detail" event.id %}' class="bg-yellow-50 text-red-800 px-2 py-1 rounded text-sm">Details</a>
+                <td class="hidden md:inline-block py-2">
+                  <a href='{% url "event-detail" event.id %}' class="border-2 border-amber-700 shadow text-amber-700 px-2 py-1 rounded text-sm">Details</a>
                 </td>
               </tr>
                 {% endfor %}

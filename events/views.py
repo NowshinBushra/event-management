@@ -16,7 +16,7 @@ def is_organizer(user):
 
 def is_participant(user):
     return user.groups.filter(name='User').exists()
-
+ 
 def events_by_category(request):
     c_id = request.GET.get('category')
     start_date = request.GET.get("start_date")
@@ -74,8 +74,8 @@ def event_detail(request, id):
 @login_required
 @permission_required("events.add_event", login_url='no-permission')
 def create_event(request):
-    event_form = EventModelForm()
-    category_form = CategoryModelForm()
+    # event_form = EventModelForm()
+    # category_form = CategoryModelForm()
     # participant_form = UserModelForm()
 
     if request.method == "POST":
@@ -102,6 +102,10 @@ def create_event(request):
 
             messages.success(request, "Event added successfully!")
             return redirect("create-event")
+        
+    else:
+        event_form = EventModelForm()
+        category_form = CategoryModelForm()
 
     context = {
         "event_form": event_form,
@@ -149,22 +153,27 @@ def delete_event(request, id):
         event = Event.objects.get(id=id)
         event.delete()
         messages.success(request, 'Event deleted successfully')
-        return redirect('organizer-dashboard')
+        return redirect('show-events')
     else:
         messages.success(request, 'Something went wrong')
-        return redirect('organizer-dashboard')
+        return redirect('show-events')
 
 
 
 @user_passes_test(is_organizer, login_url='no-permission')
 def organizer_dashboard(request):
     type = request.GET.get('type','all')
-
+    
     today = now().date()
     todays_event = Event.objects.filter(date=today)
     all_participants = User.objects.filter(groups__name="User")   #======================pchange
     all_participants_count = all_participants.count()
     
+    participant_events = []
+    for participant in all_participants:
+        next_event = participant.rsvp_events.filter(date__gte=now().date()).order_by('date').first()
+        participant_events.append((participant, next_event))
+
     base_query = Event.objects.select_related('category').prefetch_related('participants')
 
     if type == 'all':
@@ -175,9 +184,10 @@ def organizer_dashboard(request):
         events = base_query.filter(date__lt=today)
     elif type == 'total events':
         events = base_query.all()
-    elif type == 'all_participants':
+    elif type == 'all participants':
         events = all_participants    
 
+        
     counts = Event.objects.aggregate(
         total_events = Count('id'),
         upcoming_events_count = Count('id', filter= Q(date__gte=today)),
@@ -190,6 +200,7 @@ def organizer_dashboard(request):
         "todays_event": todays_event,
         "all_participants": all_participants,
         "all_participants_count": all_participants_count,
+        'participant_events' : participant_events,
         'dashboard_url': 'organizer-dashboard',
         }
     return render(request, "organizer-dashboard.html", context)
@@ -205,7 +216,7 @@ def user_dashboard(request):
     
     base_query = Event.objects.select_related('category').prefetch_related('participants')
     if type == 'all':
-        events = base_query.all()
+        events = my_rsvp_events
     elif type == 'total events':
         events = base_query.all()
     elif type == 'upcoming events':
@@ -220,6 +231,7 @@ def user_dashboard(request):
         upcoming_events_count = Count('id', filter= Q(date__gte=today)),
         past_events_count = Count('id', filter= Q(date__lt=today))
     )
+    next_rsvp_events = my_rsvp_events.filter(date__gte=today)
     rsvp_counts = request.user.rsvp_events.aggregate(
         past_rsvp_events_count=Count('id', filter=Q(date__lt=today)),
     )
@@ -231,6 +243,7 @@ def user_dashboard(request):
 
         "rsvp_counts": rsvp_counts,
         "my_rsvp_events": my_rsvp_events,
+        "next_rsvp_events": next_rsvp_events,
         'dashboard_url': 'user-dashboard',
         }
     return render(request, "user-dashboard.html", context)
@@ -267,3 +280,4 @@ def dashboard(request):
         return redirect('admin-dashboard')
 
     return redirect('no-permission')
+
