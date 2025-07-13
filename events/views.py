@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.db.models import Q, Count 
 from django.utils.timezone import now, localdate
 from django.http import HttpResponse
-from events.forms import EventModelForm, CategoryModelForm #, ParticipantModelForm
-from events.models import Event, Category, User #, Participant
+from events.forms import EventModelForm, CategoryModelForm 
+from events.models import Event, Category, User 
 from django.contrib import messages
 from core.views import home
 from users.views import is_admin
@@ -35,7 +35,6 @@ def events_by_category(request):
 
 def show_events(request):
     search = request.GET.get('search', '')
-    # print(search)
     events = Event.objects.select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
 
     if search:
@@ -52,46 +51,20 @@ def event_detail(request, id):
     
     context = {'event': event.first()}
     return render(request, "event_detail.html", context)
-    
-# def create_event(request): 
-#     form = EventModelForm()
-#     if request.method == "POST":
-#         form = EventModelForm(request.POST)
-#         if form.is_valid():
-#             event = form.save(commit=False)
-#             event.save()
-#             participants = form.cleaned_data.get('participants') 
-#             event.participants.set(participants)
-#             messages.success(request, "Event added successfully")
-#             return redirect('create-event')
-#         else:
-#             messages.error(request, "Please correct the errors below.")
-#     context = {"form": form}
-#     return render(request, "event_form.html", context)
 
-# 
 
 @login_required
 @permission_required("events.add_event", login_url='no-permission')
 def create_event(request):
-    # event_form = EventModelForm()
-    # category_form = CategoryModelForm()
-    # participant_form = UserModelForm()
 
     if request.method == "POST":
         event_form = EventModelForm(request.POST, request.FILES)
         category_form = CategoryModelForm(request.POST)
-        # participant_form = UserModelForm(request.POST) 
         
         if "add_category" in request.POST and category_form.is_valid():
             category_form.save()
             messages.success(request, "Category added successfully!")
             return redirect("create-event")
-
-        # if "add_participant" in request.POST and participant_form.is_valid():
-        #     participant_form.save()
-        #     messages.success(request, "Participant added successfully!")
-        #     return redirect("create-event")
 
         if "create_event" in request.POST and event_form.is_valid():
             event = event_form.save(commit=False)
@@ -110,9 +83,8 @@ def create_event(request):
     context = {
         "event_form": event_form,
         "category_form": category_form,
-        # "participant_form": participant_form,
         "categories": Category.objects.all(),
-        "participants": User.objects.filter(groups__name="User"), #======================pchange
+        "participants": User.objects.filter(groups__name="User"), 
     }
     return render(request, "event_form.html", context)
 
@@ -123,12 +95,10 @@ def update_event(request, id):
     event = Event.objects.get(id=id)
     event_form = EventModelForm(instance=event)
     category_form = CategoryModelForm()
-    # participant_form = UserModelForm() 
 
     if request.method == "POST":
         event_form = EventModelForm(request.POST, instance=event)
         category_form = CategoryModelForm(request.POST)
-        # participant_form = UserModelForm(request.POST) 
 
         if event_form.is_valid():
             event_form.save()
@@ -166,7 +136,7 @@ def organizer_dashboard(request):
     
     today = now().date()
     todays_event = Event.objects.filter(date=today)
-    all_participants = User.objects.filter(groups__name="User")   #======================pchange
+    all_participants = User.objects.filter(groups__name="User")  
     all_participants_count = all_participants.count()
     
     participant_events = []
@@ -280,4 +250,3 @@ def dashboard(request):
         return redirect('admin-dashboard')
 
     return redirect('no-permission')
-

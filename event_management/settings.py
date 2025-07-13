@@ -180,5 +180,5 @@ FRONTEND_URL = 'http://127.0.0.1:8000'
 LOGIN_URL = "sign-in"
 
 
-print("✅ EMAIL:", config('EMAIL_HOST_USER'))
-print("✅ PASSWORD EXISTS:", bool(config('EMAIL_HOST_PASSWORD')))
+# print("✅ EMAIL:", config('EMAIL_HOST_USER'))
+# print("✅ PASSWORD EXISTS:", bool(config('EMAIL_HOST_PASSWORD')))

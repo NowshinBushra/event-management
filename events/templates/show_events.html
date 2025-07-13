@@ -22,7 +22,6 @@
               {% comment %} Events List {% endcomment %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for event in events %}
-              {% comment %} <div class="flex flex-col md:flex-row justify-between items-center shadow-lg bg-amber-100 p-6 md:p-8 my-4 mx-4 md:mx-10 lg:mx-96"> {% endcomment %}
               <div class="flex flex-col justify-between rounded-xl items-center border-2 border-slate-800 shadow-lg bg-white my-6 mx-4">
                 <div class="">
                   <img src="{{ event.asset.url }}" alt="Event Asset" class="w-full h-auto" />

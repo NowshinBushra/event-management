@@ -86,7 +86,6 @@ def admin_dashboard(request):
         else:
             user.group_name = 'No Group Assigned'
 
-
     context = {
         "users": users,
         'events': events,
@@ -105,7 +104,7 @@ def assign_role(request, user_id):
         form = AssignRoleForm(request.POST)
         if form.is_valid():
             role = form.cleaned_data.get('role')
-            user.groups.clear()    # remove old roles
+            user.groups.clear()   
             user.groups.add(role)
             messages.success(request, f"User {user.username} has been assigned to the {role.name} role")
             return redirect('admin-dashboard')
@@ -154,4 +153,3 @@ def delete_group(request, grp_id):
     else:
         messages.success(request, 'Something went wrong')
         return redirect('group-list')
-
