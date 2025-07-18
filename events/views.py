@@ -9,6 +9,10 @@ from django.contrib import messages
 from core.views import home
 from users.views import is_admin
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.views import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic.base import ContextMixin
 
 
 def is_organizer(user):
@@ -89,6 +93,53 @@ def create_event(request):
     return render(request, "event_form.html", context)
 
 
+# create_decorators = [login_required, permission_required("events.add_event", login_url='no-permission')]
+# @method_decorator(create_decorators, name="dispatch")
+
+class CreateEvent(ContextMixin, LoginRequiredMixin, PermissionRequiredMixin, View):
+    template_name = "event_form.html"
+    login_url = 'sign-in'	
+    permission_required = "events.add_event"
+    redirect_field_name = 'next'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["event_form"] = kwargs.get('event_form', EventModelForm())
+        context["category_form"] = kwargs.get('category_form', CategoryModelForm())
+        context["categories"] = kwargs.get(Category.objects.all())
+        context["participants"] = kwargs.get(User.objects.filter(groups__name="User"))
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        event_form = EventModelForm(request.POST, request.FILES)
+        category_form = CategoryModelForm(request.POST)
+        
+        if "add_category" in request.POST and category_form.is_valid():
+            category_form.save()
+            messages.success(request, "Category added successfully!")
+            return redirect('create-event')
+            # context = self.get_context_data(
+            #     event_form=event_form, category_form=category_form)
+            # return render(request, self.template_name, context)
+
+        if "create_event" in request.POST and event_form.is_valid():
+            event = event_form.save(commit=False)
+            event.save()
+
+            participants = event_form.cleaned_data.get("participants")
+            event.participants.set(participants)
+
+            messages.success(request, "Event added successfully!")
+            return redirect("create-event")
+            # context = self.get_context_data(
+            #     event_form=event_form, category_form=category_form)
+            # return render(request, self.template_name, context)
+
+
 @login_required
 @permission_required("events.change_event", login_url='no-permission')
 def update_event(request, id):
@@ -115,6 +166,11 @@ def update_event(request, id):
     context = {"event_form": event_form, "category_form": category_form}
     return render(request, "event_form.html", context)
 
+class UpdateEvent(View):
+    def get(self, request, *args, **kwargs):
+        pass
+    def post(self, request, *args, **kwargs):
+        pass
 
 @login_required
 @permission_required("events.delete_event", login_url='no-permission')
