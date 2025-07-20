@@ -13,6 +13,8 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import ContextMixin
+from django.views.generic import ListView, DetailView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 
 
 def is_organizer(user):
@@ -48,6 +50,23 @@ def show_events(request):
         }
     return render(request, "show_events.html", context)
 
+class ShowEvents(ListView):
+    model = Event
+    context_object_name = 'events'
+    template_name = "show_events.html"
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', '')
+        queryset = Event.objects.select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
+        if search:
+            queryset = queryset.filter(Q(title__icontains=search) | Q(location__icontains=search)) 
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('search', '')
+        return context
+    
 
 @login_required
 def event_detail(request, id):
@@ -56,6 +75,15 @@ def event_detail(request, id):
     context = {'event': event.first()}
     return render(request, "event_detail.html", context)
 
+class EventDetail(LoginRequiredMixin, DetailView):
+    model = Event
+    template_name = "event_detail.html"
+    context_object_name = 'event'
+    pk_url_kwarg = 'id'
+
+    def get_queryset(self):
+        queryset = Event.objects.select_related('category').prefetch_related('participants').annotate(participant_count=Count('participants'))
+        return queryset
 
 @login_required
 @permission_required("events.add_event", login_url='no-permission')
@@ -93,9 +121,6 @@ def create_event(request):
     return render(request, "event_form.html", context)
 
 
-# create_decorators = [login_required, permission_required("events.add_event", login_url='no-permission')]
-# @method_decorator(create_decorators, name="dispatch")
-
 class CreateEvent(ContextMixin, LoginRequiredMixin, PermissionRequiredMixin, View):
     template_name = "event_form.html"
     login_url = 'sign-in'	
@@ -122,9 +147,6 @@ class CreateEvent(ContextMixin, LoginRequiredMixin, PermissionRequiredMixin, Vie
             category_form.save()
             messages.success(request, "Category added successfully!")
             return redirect('create-event')
-            # context = self.get_context_data(
-            #     event_form=event_form, category_form=category_form)
-            # return render(request, self.template_name, context)
 
         if "create_event" in request.POST and event_form.is_valid():
             event = event_form.save(commit=False)
@@ -135,10 +157,6 @@ class CreateEvent(ContextMixin, LoginRequiredMixin, PermissionRequiredMixin, Vie
 
             messages.success(request, "Event added successfully!")
             return redirect("create-event")
-            # context = self.get_context_data(
-            #     event_form=event_form, category_form=category_form)
-            # return render(request, self.template_name, context)
-
 
 @login_required
 @permission_required("events.change_event", login_url='no-permission')
@@ -166,11 +184,37 @@ def update_event(request, id):
     context = {"event_form": event_form, "category_form": category_form}
     return render(request, "event_form.html", context)
 
-class UpdateEvent(View):
-    def get(self, request, *args, **kwargs):
-        pass
+
+update_decorators = [login_required, permission_required("events.change_event", login_url='sign-in')]
+@method_decorator(update_decorators, name="dispatch")
+class UpdateEvent(UpdateView):
+    model = Event
+    pk_url_kwarg = 'id'
+    form_class  = EventModelForm
+    template_name = "event_form.html"
+    context_object_name = 'event'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)     
+        context["event_form"] = self.get_form()
+        context["category_form"] = CategoryModelForm
+        return context
+    
     def post(self, request, *args, **kwargs):
-        pass
+        self.object = self.get_object()
+        event_form = EventModelForm(request.POST, instance=self.object)
+
+        if event_form.is_valid():
+            event_form.save()
+
+            participants = event_form.cleaned_data.get("participants")
+            if participants:
+                self.object.participants.set(participants)
+
+            messages.success(request, "Event updated successfully")
+            return redirect('update-event', self.object.id)
+        return redirect('update-event', self.object.id)
+
 
 @login_required
 @permission_required("events.delete_event", login_url='no-permission')
@@ -184,6 +228,21 @@ def delete_event(request, id):
         messages.success(request, 'Something went wrong')
         return redirect('show-events')
 
+delete_decorators = [login_required, permission_required("events.delete_event", login_url='sign-in')]
+@method_decorator(delete_decorators, name="dispatch")
+class DeleteEvent(DeleteView):
+    model = Event
+    pk_url_kwarg = 'id'
+    success_url = reverse_lazy('show-events')
+
+    def post(self, request, *args, **kwargs):
+        deleteEvent = super().post(request, *args, **kwargs)
+        messages.success(request, 'Event deleted successfully')
+        return deleteEvent
+    
+    def get(self, request, *args, **kwargs):
+        messages.error(request, 'Something went wrong')
+        return redirect(self.success_url)
 
 
 @user_passes_test(is_organizer, login_url='no-permission')
