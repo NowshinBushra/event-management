@@ -20,23 +20,47 @@
           {% endif %}
         </div>        
           
-          <div class="flex gap-1">
-              
-                  <form action="{% url 'sign-out' %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit"
-                    class="hidden md:block px-4 py-2 rounded-lg border-2 border-amber-500 shadow text-amber-500 font-bold hover:font-extrabold"
-                    >Logout</button>
-                  </form>
-          </div>
-                  
+          <div class="flex items-center">
+                  <div class="relative">
+                    <button
+                      id="user-menu-button"
+                      class="flex rounded-full border border-white items-center focus:outline-none"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                      </svg>
 
-        {% comment %} mobile toggle button {% endcomment %}
-        <button id="menu-toggle" class="rounded md:hidden focus:outline-none">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
+                    </button>
+                    <div
+                      id="user-menu"
+                      class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden"
+                    >
+                      <a
+                        href="{% url 'admin-dashboard' %}"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >Dashboard</a
+                      >
+                      <a
+                        href="{% url 'profile' %}"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >Profile</a
+                      >
+                      <form action="{% url 'sign-out' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"
+                        class="block px-4 py-2 rounded-lg border-2 border-amber-500 shadow text-amber-500 font-bold hover:font-extrabold"
+                        >Logout</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="md:hidden ml-4">
+                    <button id="menu-toggle" class="rounded focus:outline-none">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                      </svg>
+                    </button>
+                  </div>
+          </div>
       </div>
         
         
@@ -67,11 +91,3 @@
     </nav>
   </header>
 
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-  
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>

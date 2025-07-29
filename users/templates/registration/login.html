@@ -31,8 +31,10 @@
                 </div>
             {% endfor %}
 
+            <p class="text-sm text-amber-800"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
             <button class='bg-slate-800 text-white px-8 py-1.5 rounded mt-4 hover:text-amber-400' type="submit">Sign In</button>
         </form>
+        
         </div>
     </div>
     {% endblock content %}

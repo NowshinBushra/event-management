@@ -2,7 +2,11 @@ from django import forms
 import re
 from django.contrib.auth.models import User, Group, Permission
 from events.forms import StyledFormMixin
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
+from users.models import CustomUser
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class CustomRegisterForm(StyledFormMixin, forms.ModelForm):
@@ -81,3 +85,20 @@ class CreateGroupForm(StyledFormMixin, forms.ModelForm):
         model = Group
         fields = ['name', 'permissions']
 
+class CustomPasswordChangeForm(StyledFormMixin, PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['old_password'].help_text = "Enter your current password here."
+            self.fields['new_password1'].help_text = "Your password can’t be too similar to your other personal information. \nYour password must contain at least 8 characters. \nYour password can’t be a commonly used password. \nYour password can’t be entirely numeric."
+            self.fields['new_password2'].help_text = "Enter the same password as before, for verification."
+
+class CustomPasswordResetForm(StyledFormMixin, PasswordResetForm):
+    pass
+
+class CustomPasswordResetConfirmForm(StyledFormMixin, SetPasswordForm):
+    pass
+
+class EditProfileForm(StyledFormMixin, forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'first_name', 'last_name', 'phone_no', 'profile_image', 'website', 'designation', 'company', 'office_address', 'home_address']

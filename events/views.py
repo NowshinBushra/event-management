@@ -4,7 +4,7 @@ from django.db.models import Q, Count
 from django.utils.timezone import now, localdate
 from django.http import HttpResponse
 from events.forms import EventModelForm, CategoryModelForm 
-from events.models import Event, Category, User 
+from events.models import Event, Category
 from django.contrib import messages
 from core.views import home
 from users.views import is_admin
@@ -15,7 +15,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.base import ContextMixin
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 def is_organizer(user):
     return user.groups.filter(name='Organizer').exists()
@@ -132,7 +135,7 @@ class CreateEvent(ContextMixin, LoginRequiredMixin, PermissionRequiredMixin, Vie
         context["event_form"] = kwargs.get('event_form', EventModelForm())
         context["category_form"] = kwargs.get('category_form', CategoryModelForm())
         context["categories"] = kwargs.get(Category.objects.all())
-        context["participants"] = kwargs.get(User.objects.filter(groups__name="User"))
+        context["participants"] = kwargs.get('participants', User.objects.filter(groups__name="User"))
         return context
 
     def get(self, request, *args, **kwargs):
@@ -212,8 +215,8 @@ class UpdateEvent(UpdateView):
                 self.object.participants.set(participants)
 
             messages.success(request, "Event updated successfully")
-            return redirect('update-event', self.object.id)
-        return redirect('update-event', self.object.id)
+            return redirect('event-detail', self.object.id)
+        return redirect('event-detail', self.object.id)
 
 
 @login_required
