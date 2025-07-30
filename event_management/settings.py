@@ -175,7 +175,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-FRONTEND_URL = 'http://127.0.0.1:8000'
+FRONTEND_URL = 'https://event-management-1-210u.onrender.com'
 
 LOGIN_URL = "/users/sign-in/"
 LOGIN_REDIRECT_URL = '/'
