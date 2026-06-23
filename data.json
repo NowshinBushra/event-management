@@ -1,0 +1,768 @@
+[
+    {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2025-07-27T09:29:43.784Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "1",
+            "object_repr": "Admin",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2025-07-27T09:50:45.837Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "2",
+            "object_repr": "User",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2025-07-27T09:56:23.854Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "1",
+            "object_repr": "admin",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Groups\", \"User permissions\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2025-07-27T10:04:07.914Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "1",
+            "object_repr": "admin",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"User permissions\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2025-07-27T10:04:54.280Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "2",
+            "object_repr": "alex.t",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2025-07-27T16:12:55.036Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "2",
+            "object_repr": "alex.t",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 4,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 4,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 4,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 4,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 5,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 5,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 5,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 5,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add category",
+            "content_type": 6,
+            "codename": "add_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change category",
+            "content_type": 6,
+            "codename": "change_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete category",
+            "content_type": 6,
+            "codename": "delete_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view category",
+            "content_type": 6,
+            "codename": "view_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add event",
+            "content_type": 7,
+            "codename": "add_event"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change event",
+            "content_type": 7,
+            "codename": "change_event"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete event",
+            "content_type": 7,
+            "codename": "delete_event"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view event",
+            "content_type": 7,
+            "codename": "view_event"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 8,
+            "codename": "add_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 8,
+            "codename": "change_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 8,
+            "codename": "delete_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 8,
+            "codename": "view_customuser"
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "Admin",
+            "permissions": [
+                1,
+                2,
+                3,
+                4,
+                9,
+                10,
+                11,
+                12,
+                5,
+                6,
+                7,
+                8,
+                13,
+                14,
+                15,
+                16,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                17,
+                18,
+                19,
+                20,
+                29,
+                30,
+                31,
+                32
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 3,
+        "fields": {
+            "name": "Organizer",
+            "permissions": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                20,
+                32
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 4,
+        "fields": {
+            "name": "User",
+            "permissions": [
+                24,
+                28,
+                20
+            ]
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "events",
+            "model": "category"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "events",
+            "model": "event"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "users",
+            "model": "customuser"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "lhx8vqg8fu1bbnztg5kmt4ksa1ysf9yc",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQBf-FsyGUAgsevfcbCAuLVA0kpT0Z_9026UGvb2bem_mwrcVvnRY_J3Zlkl1-NwzxSfUA6RHqvfHY6rrMyA-Fn7TzqSV63U7376CEXvaazAAkEZVTOYAGpIB2dKgtGKVFTIQgAMbdykI7lyUJkZKUJlsYNLHPF-gGN7k:1ugrtL:dQAamj0Is-RhKcXfdcSOz3-tGdaDQU-s7-tUtF7Ee1E",
+            "expire_date": "2025-08-12T21:29:47.969Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "uyj73ltwy7au59mmyg86vg59pr3bcwz4",
+        "fields": {
+            "session_data": "e30:1ugret:8koiuUFQwJVE67FXql0775F8XgH1IJUTyP0DCtpYiuY",
+            "expire_date": "2025-08-12T21:14:51.373Z"
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 1,
+        "fields": {
+            "name": "Technology",
+            "description": "Explore the latest innovations in tech, featuring interactive demos, expert panels, and product showcases from industry leaders."
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 2,
+        "fields": {
+            "name": "Workshop",
+            "description": "Hands-on learning experiences designed to upskill participants through expert-led workshops, seminars, and technical sessions."
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 3,
+        "fields": {
+            "name": "Exhibition Stall",
+            "description": "Best Exhibition Stand, Booth, Interior Design Services."
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 4,
+        "fields": {
+            "name": "Corporate Event",
+            "description": "Customized event planning to make your business shine"
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 2,
+        "fields": {
+            "title": "Gadget Fair Glasgow",
+            "description": "A vibrant fair featuring the latest tech gadgets, smart home devices, and electronics from popular brands and start-ups.",
+            "date": "2025-04-01",
+            "time": "22:36:00",
+            "location": "SEC Centre",
+            "category": 3,
+            "asset": "event_asset/gadget_fair_1ts0XA8.jpg",
+            "participants": []
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 3,
+        "fields": {
+            "title": "AI Summit Manchester",
+            "description": "A summit bringing together top minds in AI to discuss cutting-edge research, applications in healthcare, finance, and ethics in artificial intelligence.",
+            "date": "2026-11-01",
+            "time": "22:37:00",
+            "location": "Manchester Central",
+            "category": 1,
+            "asset": "event_asset/ai-summit_5WgqVyG.jpg",
+            "participants": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 4,
+        "fields": {
+            "title": "Tech Expo London",
+            "description": "An annual technology conference showcasing the latest innovations in software, hardware, and emerging tech trends across industries.",
+            "date": "2027-05-01",
+            "time": "22:39:00",
+            "location": "ExCel London",
+            "category": 1,
+            "asset": "event_asset/tech-expo_NXth0rR.jpg",
+            "participants": []
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 5,
+        "fields": {
+            "title": "Art Exhibition Oxford",
+            "description": "A curated exhibition featuring contemporary artwork by local and international artists, celebrating creativity and visual storytelling.",
+            "date": "2025-07-01",
+            "time": "10:44:00",
+            "location": "Ashmolean Museum",
+            "category": 3,
+            "asset": "event_asset/art-exhibition_yCcxIL3.jpg",
+            "participants": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 6,
+        "fields": {
+            "title": "Business Workshop York",
+            "description": "A hands-on workshop designed to empower small business owners with practical strategies, marketing tools, and financial planning techniques.",
+            "date": "2027-08-01",
+            "time": "23:12:00",
+            "location": "York Barbican",
+            "category": 4,
+            "asset": "event_asset/bsns-workshop_RlMBMhO.jpg",
+            "participants": []
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 7,
+        "fields": {
+            "title": "Executive Leadership Forum",
+            "description": "An exclusive forum for senior executives focusing on leadership development, strategic thinking, and future-ready business practices.",
+            "date": "2025-06-01",
+            "time": "16:13:00",
+            "location": "Canary Wharf, London",
+            "category": 2,
+            "asset": "event_asset/leadership-forum_XFBFh7t.jpg",
+            "participants": []
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 8,
+        "fields": {
+            "title": "Corporate Meetup Leeds",
+            "description": "A professional networking event for executives and industry leaders to exchange insights, build connections, and explore new business opportunities.",
+            "date": "2025-01-01",
+            "time": "12:20:00",
+            "location": "Leeds City Hall",
+            "category": 4,
+            "asset": "event_asset/corporate-meetup2_o9RWrd0.jpg",
+            "participants": []
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$Cl0y0wqEjH5TSHhr1YYGY4$kRcGwc9+vvJafJLsoD9huxl+IF6N3i6V0XKvqE775Gc=",
+            "last_login": "2025-07-29T21:26:19.668Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "Event",
+            "last_name": "Admin",
+            "email": "admin@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2025-07-27T09:26:06Z",
+            "profile_image": "profile_images/default-profile-image_Es8K5Et.jpg",
+            "phone_no": "01234567890",
+            "website": null,
+            "designation": null,
+            "company": null,
+            "office_address": null,
+            "home_address": null,
+            "groups": [
+                1
+            ],
+            "user_permissions": [
+                1,
+                2,
+                3,
+                4,
+                9,
+                10,
+                11,
+                12,
+                5,
+                6,
+                7,
+                8,
+                13,
+                14,
+                15,
+                16,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                17,
+                18,
+                19,
+                20,
+                29,
+                30,
+                31,
+                32
+            ]
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$171mIcixpGi4s3NMAocVGz$oyshAw5AbhsEudcUGKtllsA4HgCDefKsjrpSK1LZhho=",
+            "last_login": "2025-07-29T21:29:47.967Z",
+            "is_superuser": false,
+            "username": "alex.t",
+            "first_name": "Alex",
+            "last_name": "Taylor",
+            "email": "yafole5556@coursora.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-27T09:47:52Z",
+            "profile_image": "profile_images/ai.jpg",
+            "phone_no": "01234567890",
+            "website": "https://github.com/",
+            "designation": "Software Engineering",
+            "company": "Abc-Soft Ltd",
+            "office_address": "32/A, xyz road, Dhaka",
+            "home_address": "Abc road, Chittagong",
+            "groups": [
+                4
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$d2FWOeswTFOCYR6RfpmKpY$gFaWajUFcTQV8EaDumrxqmBt6dUq4WauOLuIRMsM5Zw=",
+            "last_login": "2025-07-28T06:38:29.874Z",
+            "is_superuser": false,
+            "username": "james.a",
+            "first_name": "James",
+            "last_name": "Anderson",
+            "email": "lejol53426@ikanteri.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-07-27T18:36:46.714Z",
+            "profile_image": "profile_images/default-profile-image.jpg",
+            "phone_no": null,
+            "website": null,
+            "designation": null,
+            "company": null,
+            "office_address": null,
+            "home_address": null,
+            "groups": [
+                3
+            ],
+            "user_permissions": []
+        }
+    }
+]
