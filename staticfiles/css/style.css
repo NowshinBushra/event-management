@@ -1,0 +1,8 @@
+.banner {
+    background-image: url('../images/banner.png');
+    /* background-color: rgb(133, 111, 84); */
+    background-size:cover;
+    background-position: center;
+    /* height: 100%; */
+    color: black;
+}
