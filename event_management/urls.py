@@ -16,6 +16,9 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('no-permission/', no_permission, name='no-permission'),
     path('test-media/', test_media)
-] + debug_toolbar_urls()
+] 
+# + debug_toolbar_urls()
+if settings.DEBUG:
+    urlpatterns += debug_toolbar_urls()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
