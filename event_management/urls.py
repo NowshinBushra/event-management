@@ -6,7 +6,6 @@ from events.views import dashboard
 from django.conf import settings
 from django.conf.urls.static import static
 
-from events.views import test_media
 from django.views.static import serve
 from django.urls import re_path
 urlpatterns = [
@@ -16,15 +15,14 @@ urlpatterns = [
         serve,
         {'document_root': settings.MEDIA_ROOT},
     ),
-    
+
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
     path('', home, name='home'),
     path('events/', include('events.urls')),
     path('users/', include('users.urls')),
     path('dashboard/', dashboard, name='dashboard'),
-    path('no-permission/', no_permission, name='no-permission'),
-    path('test-media/', test_media)
+    path('no-permission/', no_permission, name='no-permission')
 ] 
 # + debug_toolbar_urls()
 if settings.DEBUG:

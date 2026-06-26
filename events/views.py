@@ -17,9 +17,6 @@ from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 
-from django.conf import settings
-import os
-
 User = get_user_model()
 
 def is_organizer(user):
@@ -372,16 +369,3 @@ def dashboard(request):
     return redirect('no-permission')
 
 
-
-
-
-def test_media(request):
-    path = os.path.join(
-        settings.MEDIA_ROOT,
-        'event_asset',
-        'art-exhibition_yCcxIL3.jpg'
-    )
-
-    return HttpResponse(
-        f"Exists: {os.path.exists(path)}<br>{path}"
-    )
